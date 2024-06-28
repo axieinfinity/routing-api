@@ -296,6 +296,7 @@ const app = new cdk.App()
 
 const jsonRpcProviders = {
   WEB3_RPC_1: process.env.WEB3_RPC_1!,
+  WEB3_RPC_11155111: process.env.WEB3_RPC_11155111!,
 }
 
 // Local dev stack

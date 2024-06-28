@@ -136,7 +136,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
             requestQueryParams = requestValidation.requestQueryParams
           } catch (err) {
             log.error({ err }, 'Unexpected error validating request')
-            return INTERNAL_ERROR()
+            return INTERNAL_ERROR("1")
           }
 
           const injector = await this.injectorPromise
@@ -156,7 +156,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
             )
           } catch (err) {
             log.error({ err, event }, 'Unexpected error building request injected.')
-            return INTERNAL_ERROR()
+            return INTERNAL_ERROR("2")
           }
 
           const { id } = requestInjected
@@ -195,7 +195,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
             }
           } catch (err) {
             log.error({ err }, 'Unexpected error in handler')
-            return INTERNAL_ERROR(id)
+            return INTERNAL_ERROR("3")
           }
 
           let response: Res
@@ -209,7 +209,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
             response = responseValidation.response
           } catch (err) {
             log.error({ err }, 'Unexpected error validating response')
-            return INTERNAL_ERROR(id)
+            return INTERNAL_ERROR("4")
           }
 
           log.info({ statusCode, response }, `Request ended. ${statusCode}`)
