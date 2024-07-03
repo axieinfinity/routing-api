@@ -50,6 +50,10 @@ The best way to develop and test the API is to deploy your own instance to AWS.
    ```
    cdk deploy RoutingAPIStack
    ```
+   If you use aws-vault store AWS ACCESS KEY
+   ```
+   AWS_REGION=us-east-2 aws-vault exec [profile] --no-session -- cdk deploy RoutingAPIStack
+   ```
    This will deploy to the default account your AWS CLI is configured for. Once complete it will output something like:
    ```
    RoutingAPIStack.Url = https://...
