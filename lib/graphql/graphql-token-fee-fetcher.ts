@@ -4,9 +4,9 @@ import { TokenFeeMap } from '@uniswap/smart-order-router/build/main/providers/to
 import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
 import { TokensInfoResponse } from './graphql-schemas'
 import { BigNumber } from 'ethers'
-import { ChainId } from '@uniswap/sdk-core'
 import { metric } from '@uniswap/smart-order-router/build/main/util/metric'
 import { log, MetricLoggerUnit } from '@uniswap/smart-order-router'
+import { IChainID } from '../../common/override-sdk-core'
 
 /* Implementation of the ITokenFeeFetcher interface to give access to Uniswap GraphQL API token fee data.
  * This fetcher is used to get token fees from GraphQL API and fallback to OnChainTokenFeeFetcher if GraphQL API fails
@@ -18,12 +18,12 @@ import { log, MetricLoggerUnit } from '@uniswap/smart-order-router'
 export class GraphQLTokenFeeFetcher implements ITokenFeeFetcher {
   private readonly graphQLProvider: IUniGraphQLProvider
   private readonly onChainFeeFetcherFallback: ITokenFeeFetcher
-  private readonly chainId: ChainId
+  private readonly chainId: IChainID
 
   constructor(
     graphQLProvider: IUniGraphQLProvider,
     onChainTokenFeeFetcherFallback: ITokenFeeFetcher,
-    chainId: ChainId
+    chainId: IChainID
   ) {
     this.graphQLProvider = graphQLProvider
     this.onChainFeeFetcherFallback = onChainTokenFeeFetcherFallback

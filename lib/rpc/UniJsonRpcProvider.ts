@@ -15,9 +15,10 @@ import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { Deferrable } from '@ethersproject/properties'
 import Logger from 'bunyan'
 import { UniJsonRpcProviderConfig } from './config'
+import { IChainID } from '../../common/override-sdk-core'
 
 export class UniJsonRpcProvider extends StaticJsonRpcProvider {
-  readonly chainId: ChainId = ChainId.MAINNET
+  readonly chainId: IChainID = ChainId.MAINNET
 
   private readonly providers: SingleJsonRpcProvider[] = []
 
@@ -63,7 +64,7 @@ export class UniJsonRpcProvider extends StaticJsonRpcProvider {
    * @param sessionAllowProviderFallbackWhenUnhealthy
    */
   constructor(
-    chainId: ChainId,
+    chainId: IChainID,
     singleRpcProviders: SingleJsonRpcProvider[],
     log: Logger,
     config: UniJsonRpcProviderConfig,

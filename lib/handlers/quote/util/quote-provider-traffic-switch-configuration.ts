@@ -1,4 +1,5 @@
 import { ChainId } from '@uniswap/sdk-core'
+import { IChainID } from '../../../../common/override-sdk-core'
 
 export type QuoteProviderTrafficSwitchConfiguration = {
   switchExactInPercentage: number
@@ -8,7 +9,7 @@ export type QuoteProviderTrafficSwitchConfiguration = {
 }
 
 export const QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION = (
-  chainId: ChainId
+  chainId: IChainID
 ): QuoteProviderTrafficSwitchConfiguration => {
   switch (chainId) {
     // Mumbai was deprecated on April 13th. Do not sample at all

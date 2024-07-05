@@ -1,4 +1,3 @@
-import { ChainId } from '@uniswap/sdk-core'
 import * as cdk from 'aws-cdk-lib'
 import { CfnOutput, SecretValue, Stack, StackProps, Stage, StageProps } from 'aws-cdk-lib'
 import * as chatbot from 'aws-cdk-lib/aws-chatbot'
@@ -12,7 +11,7 @@ import 'source-map-support/register'
 import { SUPPORTED_CHAINS } from '../lib/handlers/injector-sor'
 import { STAGE } from '../lib/util/stage'
 import { RoutingAPIStack } from './stacks/routing-api-stack'
-
+import {IChainID} from '../common/override-sdk-core'
 dotenv.config()
 
 export class RoutingAPIStage extends Stage {
@@ -180,7 +179,7 @@ export class RoutingAPIPipeline extends Stack {
 
     // Load RPC provider URLs from AWS secret
     let jsonRpcProviders = {} as { [chainId: string]: string }
-    SUPPORTED_CHAINS.forEach((chainId: ChainId) => {
+    SUPPORTED_CHAINS.forEach((chainId: IChainID) => {
       const key = `WEB3_RPC_${chainId}`
       jsonRpcProviders[key] = jsonRpcProvidersSecret.secretValueFromJson(key).toString()
       new CfnOutput(this, key, {
@@ -297,6 +296,8 @@ const app = new cdk.App()
 const jsonRpcProviders = {
   WEB3_RPC_1: process.env.WEB3_RPC_1!,
   WEB3_RPC_11155111: process.env.WEB3_RPC_11155111!,
+  WEB3_RPC_2020: process.env.WEB3_RPC_2020!,
+  WEB3_RPC_2021: process.env.WEB3_RPC_2021!,
 }
 
 // Local dev stack

@@ -1,12 +1,13 @@
 import { Protocol } from '@uniswap/router-sdk'
 import { V2SubgraphProvider, V3SubgraphProvider } from '@uniswap/smart-order-router'
 import { ChainId } from '@uniswap/sdk-core'
+import { IChainID } from '../../common/override-sdk-core'
 
 // during local cdk stack update, the env vars are not populated
 // make sure to fill in the env vars below
 // process.env.ALCHEMY_QUERY_KEY = ''
 
-export const v3SubgraphUrlOverride = (chainId: ChainId) => {
+export const v3SubgraphUrlOverride = (chainId: IChainID) => {
   switch (chainId) {
     case ChainId.MAINNET:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v3-mainnet/api`
@@ -32,7 +33,7 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
   }
 }
 
-export const v2SubgraphUrlOverride = (chainId: ChainId) => {
+export const v2SubgraphUrlOverride = (chainId: IChainID) => {
   switch (chainId) {
     case ChainId.MAINNET:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-mainnet/api`

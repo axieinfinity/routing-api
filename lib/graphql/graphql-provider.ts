@@ -6,13 +6,14 @@ import {
   GRAPHQL_QUERY_TOKEN_INFO_BY_ADDRESS_CHAIN,
 } from './graphql-queries'
 import { TokenInfoResponse, TokensInfoResponse } from './graphql-schemas'
+import { IChainID } from '../../common/override-sdk-core'
 
 /* Interface for accessing Uniswap GraphQL API */
 export interface IUniGraphQLProvider {
   /* Fetch token info for a given chain and address */
-  getTokenInfo(chainId: ChainId, address: string): Promise<TokenInfoResponse>
+  getTokenInfo(chainId: IChainID, address: string): Promise<TokenInfoResponse>
   /* Fetch token info for multiple tokens given a chain and addresses */
-  getTokensInfo(chainId: ChainId, addresses: string[]): Promise<TokensInfoResponse>
+  getTokensInfo(chainId: IChainID, addresses: string[]): Promise<TokensInfoResponse>
   // Add more methods here as needed.
   // - more details: https://github.com/Uniswap/data-api-graphql/blob/main/graphql/schema.graphql
 }
@@ -33,7 +34,7 @@ export class UniGraphQLProvider implements IUniGraphQLProvider {
   /* Convert ChainId to a string recognized by data-graph-api graphql endpoint.
    *  GraphQL Chain Enum located here: https://github.com/Uniswap/data-api-graphql/blob/main/graphql/schema.graphql#L155
    *  */
-  private _chainIdToGraphQLChainName(chainId: ChainId): string | undefined {
+  private _chainIdToGraphQLChainName(chainId: IChainID): string | undefined {
     // TODO: add complete list / use data-graphql-api to populate. Only MAINNET for now.
     switch (chainId) {
       case ChainId.MAINNET:
@@ -43,13 +44,13 @@ export class UniGraphQLProvider implements IUniGraphQLProvider {
     }
   }
 
-  async getTokenInfo(chainId: ChainId, address: string): Promise<TokenInfoResponse> {
+  async getTokenInfo(chainId: IChainID, address: string): Promise<TokenInfoResponse> {
     const query = GRAPHQL_QUERY_TOKEN_INFO_BY_ADDRESS_CHAIN
     const variables = { chain: this._chainIdToGraphQLChainName(chainId), address: address }
     return this.client.fetchData<TokenInfoResponse>(query, variables)
   }
 
-  async getTokensInfo(chainId: ChainId, addresses: string[]): Promise<TokensInfoResponse> {
+  async getTokensInfo(chainId: IChainID, addresses: string[]): Promise<TokensInfoResponse> {
     const query = GRAPHQL_QUERY_MULTIPLE_TOKEN_INFO_BY_CONTRACTS
     const contracts = addresses.map((address) => ({
       chain: this._chainIdToGraphQLChainName(chainId),

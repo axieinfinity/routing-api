@@ -4,8 +4,9 @@ import { ChainId } from '@uniswap/sdk-core'
 import _ from 'lodash'
 import { ID_TO_NETWORK_NAME } from '@uniswap/smart-order-router/build/main/util/chains'
 import { ProviderName } from '../handlers/evm/provider/ProviderName'
+import { IChainID } from '../../common/override-sdk-core'
 
-const ID_TO_PROVIDER = (id: ChainId): string => {
+const ID_TO_PROVIDER = (id: IChainID): string => {
   switch (id) {
     case ChainId.MAINNET:
     case ChainId.OPTIMISM:
@@ -31,9 +32,9 @@ const ID_TO_PROVIDER = (id: ChainId): string => {
 export class RpcProvidersWidgetsFactory implements WidgetsFactory {
   region: string
   namespace: string
-  chains: Array<ChainId>
+  chains: Array<IChainID>
 
-  constructor(namespace: string, region: string, chains: Array<ChainId>) {
+  constructor(namespace: string, region: string, chains: Array<IChainID>) {
     this.namespace = namespace
     this.region = region
     this.chains = chains

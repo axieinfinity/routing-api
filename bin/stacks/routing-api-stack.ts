@@ -1,6 +1,5 @@
 import { SUPPORTED_CHAINS } from '@uniswap/smart-order-router'
 import * as cdk from 'aws-cdk-lib'
-import { ChainId } from '@uniswap/sdk-core'
 import { CfnOutput, Duration } from 'aws-cdk-lib'
 import * as aws_apigateway from 'aws-cdk-lib/aws-apigateway'
 import { MethodLoggingLevel } from 'aws-cdk-lib/aws-apigateway'
@@ -20,8 +19,9 @@ import { RpcGatewayDashboardStack } from './rpc-gateway-dashboard'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
 import { RpcGatewayFallbackStack } from './rpc-gateway-fallback-stack'
+import { IChainID } from '../../common/override-sdk-core'
 
-export const CHAINS_NOT_MONITORED: ChainId[] = TESTNETS
+export const CHAINS_NOT_MONITORED: IChainID[] = TESTNETS
 export const REQUEST_SOURCES_NOT_MONITORED = ['unknown']
 
 export class RoutingAPIStack extends cdk.Stack {

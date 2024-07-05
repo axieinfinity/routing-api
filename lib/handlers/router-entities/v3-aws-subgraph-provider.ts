@@ -3,15 +3,17 @@ import { S3 } from 'aws-sdk'
 import { ChainId } from '@uniswap/sdk-core'
 import _ from 'lodash'
 import NodeCache from 'node-cache'
+import { IChainID } from '../../../common/override-sdk-core'
 
 const POOL_CACHE = new NodeCache({ stdTTL: 240, useClones: false })
-const POOL_CACHE_KEY = (chainId: ChainId) => `pools${chainId}`
+const POOL_CACHE_KEY = (chainId: IChainID) => `pools${chainId}`
 
 export class V3AWSSubgraphProviderWithFallback extends V3SubgraphProvider implements IV3SubgraphProvider {
   private key: string
 
-  constructor(private chain: ChainId, private bucket: string, key: string) {
-    super(chain)
+  constructor(private chain: IChainID, private bucket: string, key: string) {
+    //NOTE: Fixing the type of chain to ChainId
+    super(chain as ChainId)
     this.key = `${key}${chain != ChainId.MAINNET ? `-${chain}` : ''}`
   }
 

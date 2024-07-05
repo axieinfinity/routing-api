@@ -1,6 +1,7 @@
 import { ChainId } from '@uniswap/sdk-core'
+import { IChainID, RoninChainId } from '../../common/override-sdk-core'
 
-export const TESTNETS = [
+export const TESTNETS: IChainID[] = [
   ChainId.ARBITRUM_GOERLI,
   ChainId.POLYGON_MUMBAI,
   ChainId.GOERLI,
@@ -11,4 +12,5 @@ export const TESTNETS = [
   ChainId.OPTIMISM_GOERLI,
   ChainId.ARBITRUM_SEPOLIA,
   ChainId.ARBITRUM_GOERLI,
+  RoninChainId.SAIGON_TESTNET
 ]

@@ -1,4 +1,3 @@
-import { ChainId } from '@uniswap/sdk-core'
 import * as cdk from 'aws-cdk-lib'
 import * as aws_cloudwatch from 'aws-cdk-lib/aws-cloudwatch'
 import { Construct } from 'constructs'
@@ -9,10 +8,11 @@ import { SUPPORTED_CHAINS } from '../../lib/handlers/injector-sor'
 import { TESTNETS } from '../../lib/util/testNets'
 import { getRpcGatewayEnabledChains } from '../../lib/rpc/ProdConfig'
 import { getProviderId } from '../../lib/rpc/utils'
+import { IChainID } from '../../common/override-sdk-core'
 
-const providerNameForChain: Map<ChainId, string[]> = getRpcGatewayEnabledChains()
+const providerNameForChain: Map<IChainID, string[]> = getRpcGatewayEnabledChains()
 
-function getProviderNameForChain(chainId: ChainId): string[] {
+function getProviderNameForChain(chainId: IChainID): string[] {
   if (!providerNameForChain.has(chainId)) {
     return []
   }
@@ -21,7 +21,7 @@ function getProviderNameForChain(chainId: ChainId): string[] {
   return providerNames.map((name) => (name === 'QUICKNODE' ? 'QUIKNODE' : name))
 }
 
-function getSelectMetricsForChain(chainId: ChainId) {
+function getSelectMetricsForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     metrics.push([
@@ -38,7 +38,7 @@ function getSelectMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getProviderDbHealthStateChangeForChain(chainId: ChainId) {
+function getProviderDbHealthStateChangeForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     const providerId = getProviderId(chainId, providerName)
@@ -66,7 +66,7 @@ function getProviderDbHealthStateChangeForChain(chainId: ChainId) {
   return metrics
 }
 
-function getProviderHealthStateChangeForChain(chainId: ChainId) {
+function getProviderHealthStateChangeForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     metrics.push([
@@ -93,7 +93,7 @@ function getProviderHealthStateChangeForChain(chainId: ChainId) {
   return metrics
 }
 
-function getLatencyMetricsForChain(chainId: ChainId) {
+function getLatencyMetricsForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     for (const methodName of MAJOR_METHOD_NAMES) {
@@ -114,7 +114,7 @@ function getLatencyMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getSuccessMetricsForChain(chainId: ChainId) {
+function getSuccessMetricsForChain(chainId: IChainID) {
   const metrics = []
   const methodNames = ['call', 'send', 'getGasPrice', 'getBlockNumber']
   for (const providerName of getProviderNameForChain(chainId)) {
@@ -134,7 +134,7 @@ function getSuccessMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getFailedMetricsForChain(chainId: ChainId) {
+function getFailedMetricsForChain(chainId: IChainID) {
   const metrics = []
   const methodNames = ['call', 'send', 'getGasPrice', 'getBlockNumber']
   for (const providerName of getProviderNameForChain(chainId)) {
@@ -154,7 +154,7 @@ function getFailedMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getDbSyncRequestedMetricsForChain(chainId: ChainId) {
+function getDbSyncRequestedMetricsForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     metrics.push([
@@ -171,7 +171,7 @@ function getDbSyncRequestedMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getDbSyncSampledMetricsForChain(chainId: ChainId) {
+function getDbSyncSampledMetricsForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     metrics.push([
@@ -188,7 +188,7 @@ function getDbSyncSampledMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getDbSyncSuccessMetricsForChain(chainId: ChainId) {
+function getDbSyncSuccessMetricsForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     metrics.push([
@@ -205,7 +205,7 @@ function getDbSyncSuccessMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getDbSyncFailMetricsForChain(chainId: ChainId) {
+function getDbSyncFailMetricsForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     metrics.push([
@@ -222,7 +222,7 @@ function getDbSyncFailMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getCheckHealthMetricsForChain(chainId: ChainId) {
+function getCheckHealthMetricsForChain(chainId: IChainID) {
   const metrics = []
   for (const providerName of getProviderNameForChain(chainId)) {
     metrics.push([
@@ -239,7 +239,7 @@ function getCheckHealthMetricsForChain(chainId: ChainId) {
   return metrics
 }
 
-function getQuoteCountForChain(chainId: ChainId) {
+function getQuoteCountForChain(chainId: IChainID) {
   const metrics = []
   metrics.push([
     'Uniswap',
@@ -254,7 +254,7 @@ function getQuoteCountForChain(chainId: ChainId) {
   return metrics
 }
 
-function getRpcGatewayQuoteCountForChain(chainId: ChainId) {
+function getRpcGatewayQuoteCountForChain(chainId: IChainID) {
   const metrics = []
   metrics.push([
     'Uniswap',
@@ -269,7 +269,7 @@ function getRpcGatewayQuoteCountForChain(chainId: ChainId) {
   return metrics
 }
 
-function getQuoteLatencyForChain(chainId: ChainId) {
+function getQuoteLatencyForChain(chainId: IChainID) {
   const metrics = []
   metrics.push([
     'Uniswap',
@@ -284,7 +284,7 @@ function getQuoteLatencyForChain(chainId: ChainId) {
   return metrics
 }
 
-function getRpcGatewayQuoteLatencyForChain(chainId: ChainId) {
+function getRpcGatewayQuoteLatencyForChain(chainId: IChainID) {
   const metrics = []
   metrics.push([
     'Uniswap',
@@ -299,7 +299,7 @@ function getRpcGatewayQuoteLatencyForChain(chainId: ChainId) {
   return metrics
 }
 
-function getQuote5xxCountForChain(chainId: ChainId) {
+function getQuote5xxCountForChain(chainId: IChainID) {
   const metrics = []
   metrics.push([
     'Uniswap',
@@ -314,7 +314,7 @@ function getQuote5xxCountForChain(chainId: ChainId) {
   return metrics
 }
 
-function getRpcGatewayQuote5xxCountForChain(chainId: ChainId) {
+function getRpcGatewayQuote5xxCountForChain(chainId: IChainID) {
   const metrics = []
   metrics.push([
     'Uniswap',

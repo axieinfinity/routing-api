@@ -1,4 +1,3 @@
-import { ChainId } from '@uniswap/sdk-core'
 import * as cdk from 'aws-cdk-lib'
 import * as aws_cloudwatch from 'aws-cdk-lib/aws-cloudwatch'
 import { Construct } from 'constructs'
@@ -10,6 +9,7 @@ import { ID_TO_NETWORK_NAME } from '@uniswap/smart-order-router/build/main/util/
 import { RpcProvidersWidgetsFactory } from '../../lib/dashboards/rpc-providers-widgets-factory'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
+import { IChainID } from '../../common/override-sdk-core'
 
 export const NAMESPACE = 'Uniswap'
 
@@ -775,7 +775,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
               properties: {
                 view: 'timeSeries',
                 stacked: false,
-                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: ChainId) => [
+                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: IChainID) => [
                   [NAMESPACE, `MixedAndV3AndV2SplitRouteForChain${chainId}`, 'Service', 'RoutingAPI'],
                   [NAMESPACE, `MixedAndV3SplitRouteForChain${chainId}`, 'Service', 'RoutingAPI'],
                   [NAMESPACE, `MixedAndV2SplitRouteForChain${chainId}`, 'Service', 'RoutingAPI'],
@@ -798,7 +798,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
               width: 24,
               height: 6,
               properties: {
-                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: ChainId) => [
+                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: IChainID) => [
                   ['Uniswap', `QuoteFoundForChain${chainId}`, 'Service', 'RoutingAPI'],
                   ['Uniswap', `QuoteRequestedForChain${chainId}`, 'Service', 'RoutingAPI'],
                 ]),
