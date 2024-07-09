@@ -3,7 +3,7 @@ import { Token } from '@axieinfinity/sdk-core'
 import { FeeAmount, Pool } from '@uniswap/v3-sdk'
 import { POOL_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../../util/pool-provider-traffic-switch-configuration'
 import JSBI from 'jsbi'
-import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/types/providers/provider'
+import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
 
 export type TrafficSwitchPoolProviderProps = {
   currentPoolProvider: IV3PoolProvider
