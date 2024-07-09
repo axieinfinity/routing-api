@@ -5,11 +5,11 @@ import _ from 'lodash'
 import { QuoteAmountsWidgetsFactory } from '../../lib/dashboards/quote-amounts-widgets-factory'
 import { SUPPORTED_CHAINS } from '../../lib/handlers/injector-sor'
 import { CachedRoutesWidgetsFactory } from '../../lib/dashboards/cached-routes-widgets-factory'
-import { ID_TO_NETWORK_NAME } from '@uniswap/smart-order-router/build/main/util/chains'
 import { RpcProvidersWidgetsFactory } from '../../lib/dashboards/rpc-providers-widgets-factory'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
-import { IChainID } from '../../common/override-sdk-core'
+import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export const NAMESPACE = 'Uniswap'
 
@@ -775,7 +775,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
               properties: {
                 view: 'timeSeries',
                 stacked: false,
-                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: IChainID) => [
+                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: ChainId) => [
                   [NAMESPACE, `MixedAndV3AndV2SplitRouteForChain${chainId}`, 'Service', 'RoutingAPI'],
                   [NAMESPACE, `MixedAndV3SplitRouteForChain${chainId}`, 'Service', 'RoutingAPI'],
                   [NAMESPACE, `MixedAndV2SplitRouteForChain${chainId}`, 'Service', 'RoutingAPI'],
@@ -798,7 +798,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
               width: 24,
               height: 6,
               properties: {
-                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: IChainID) => [
+                metrics: _.flatMap(SUPPORTED_CHAINS, (chainId: ChainId) => [
                   ['Uniswap', `QuoteFoundForChain${chainId}`, 'Service', 'RoutingAPI'],
                   ['Uniswap', `QuoteRequestedForChain${chainId}`, 'Service', 'RoutingAPI'],
                 ]),

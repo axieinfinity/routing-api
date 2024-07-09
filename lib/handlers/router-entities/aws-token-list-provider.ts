@@ -1,20 +1,20 @@
+import { ChainId } from '@axieinfinity/sdk-core'
 import {
   CachingTokenListProvider,
   ITokenListProvider,
   ITokenProvider,
   log,
   NodeJSCache,
-} from '@uniswap/smart-order-router'
+} from '@axieinfinity/smart-order-router'
 import { TokenList } from '@uniswap/token-lists'
 import S3 from 'aws-sdk/clients/s3'
 import NodeCache from 'node-cache'
-import { IChainID } from '../../../common/override-sdk-core'
 
 const TOKEN_LIST_CACHE = new NodeCache({ stdTTL: 600, useClones: false })
 
 export class AWSTokenListProvider extends CachingTokenListProvider {
   public static async fromTokenListS3Bucket(
-    chainId: IChainID,
+    chainId: ChainId,
     bucket: string,
     tokenListURI: string
   ): Promise<ITokenListProvider & ITokenProvider> {

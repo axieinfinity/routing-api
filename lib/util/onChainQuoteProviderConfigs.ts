@@ -9,12 +9,11 @@ import {
   DEFAULT_GAS_ERROR_FAILURE_OVERRIDES,
   DEFAULT_RETRY_OPTIONS,
   DEFAULT_SUCCESS_RATE_FAILURE_OVERRIDES,
-} from '@uniswap/smart-order-router/build/main/util/onchainQuoteProviderConfigs'
-import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@uniswap/sdk-core'
+} from '@axieinfinity/smart-order-router/dist/types/util/onchainQuoteProviderConfigs'
+import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@axieinfinity/sdk-core'
 import AsyncRetry from 'async-retry'
-import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@uniswap/smart-order-router'
+import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@axieinfinity/smart-order-router'
 import { Protocol } from '@uniswap/router-sdk'
-import { IChainID, RoninChainId } from '../../common/override-sdk-core'
 
 export const RETRY_OPTIONS: { [chainId: number]: AsyncRetry.Options | undefined } = {
   ...constructSameRetryOptionsMap(DEFAULT_RETRY_OPTIONS),
@@ -346,7 +345,7 @@ export const BLOCK_NUMBER_CONFIGS: { [chainId: number]: BlockNumberConfig } = {
 }
 
 // block -1 means it's never deployed
-export const NEW_QUOTER_DEPLOY_BLOCK: { [chainId in IChainID]: number } = {
+export const NEW_QUOTER_DEPLOY_BLOCK: { [chainId in ChainId]: number } = {
   [ChainId.MAINNET]: 19662663,
   [ChainId.GOERLI]: -1,
   [ChainId.SEPOLIA]: 5677582,
@@ -372,12 +371,11 @@ export const NEW_QUOTER_DEPLOY_BLOCK: { [chainId in IChainID]: number } = {
   [ChainId.ROOTSTOCK]: -1,
   [ChainId.BLAST]: 2370179,
   [ChainId.ZKSYNC]: 35982078,
-  [RoninChainId.RONIN_MAINNET]: -1,
-  [RoninChainId.SAIGON_TESTNET]: 28543776,
+  [ChainId.RONIN_TESTNET]: 28543776,
 }
 
 // 0 threshold means it's not deployed yet
-export const LIKELY_OUT_OF_GAS_THRESHOLD: { [chainId in IChainID]: number } = {
+export const LIKELY_OUT_OF_GAS_THRESHOLD: { [chainId in ChainId]: number } = {
   [ChainId.MAINNET]: 17540 * 2, // 17540 is the single tick.cross cost on mainnet. We multiply by 2 to be safe.
   [ChainId.GOERLI]: 0,
   [ChainId.SEPOLIA]: 17540 * 2, // 17540 is the single tick.cross cost on sepolia. We multiply by 2 to be safe.
@@ -403,8 +401,7 @@ export const LIKELY_OUT_OF_GAS_THRESHOLD: { [chainId in IChainID]: number } = {
   [ChainId.BLAST]: 17540 * 2, // 17540 is the single tick.cross cost on blast. We multiply by 2 to be safe,
   [ChainId.ZKSYNC]: 17540 * 2, // 17540 is the single tick.cross cost on zkSync. We multiply by 2 to be safe
   // NOTE: Fix this value
-  [RoninChainId.SAIGON_TESTNET]: 17540 * 2, // 17540 is the single tick.cross cost on zkSync. We multiply by 2 to be safe
-  [RoninChainId.RONIN_MAINNET]: 17540 * 2, // 17540 is the single tick.cross cost on zkSync. We multiply by 2 to be safe
+  [ChainId.RONIN_TESTNET]: 17540 * 2, // 17540 is the single tick.cross cost on zkSync. We multiply by 2 to be safe
 }
 
 // TODO: Move this new addresses to SOR

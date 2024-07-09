@@ -1,7 +1,7 @@
 import { CallType, MAJOR_METHOD_NAMES, SingleJsonRpcProvider } from './SingleJsonRpcProvider'
 import { StaticJsonRpcProvider, TransactionRequest } from '@ethersproject/providers'
 import { isEmpty } from 'lodash'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 import {
   BlockTag,
   BlockWithTransactions,
@@ -15,10 +15,9 @@ import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { Deferrable } from '@ethersproject/properties'
 import Logger from 'bunyan'
 import { UniJsonRpcProviderConfig } from './config'
-import { IChainID } from '../../common/override-sdk-core'
 
 export class UniJsonRpcProvider extends StaticJsonRpcProvider {
-  readonly chainId: IChainID = ChainId.MAINNET
+  readonly chainId: ChainId = ChainId.MAINNET
 
   private readonly providers: SingleJsonRpcProvider[] = []
 
@@ -64,7 +63,7 @@ export class UniJsonRpcProvider extends StaticJsonRpcProvider {
    * @param sessionAllowProviderFallbackWhenUnhealthy
    */
   constructor(
-    chainId: IChainID,
+    chainId: ChainId,
     singleRpcProviders: SingleJsonRpcProvider[],
     log: Logger,
     config: UniJsonRpcProviderConfig,

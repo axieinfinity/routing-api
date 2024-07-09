@@ -1,13 +1,12 @@
 import { Protocol } from '@uniswap/router-sdk'
-import { V2SubgraphProvider, V3SubgraphProvider } from '@uniswap/smart-order-router'
-import { ChainId } from '@uniswap/sdk-core'
-import { IChainID } from '../../common/override-sdk-core'
+import { V2SubgraphProvider, V3SubgraphProvider } from '@axieinfinity/smart-order-router'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 // during local cdk stack update, the env vars are not populated
 // make sure to fill in the env vars below
 // process.env.ALCHEMY_QUERY_KEY = ''
 
-export const v3SubgraphUrlOverride = (chainId: IChainID) => {
+export const v3SubgraphUrlOverride = (chainId: ChainId) => {
   switch (chainId) {
     case ChainId.MAINNET:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v3-mainnet/api`
@@ -28,12 +27,14 @@ export const v3SubgraphUrlOverride = (chainId: IChainID) => {
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v3-base/api`
     case ChainId.CELO:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v3-celo/api`
+    case ChainId.RONIN_TESTNET:
+      return 'https://saigon-thegraph.roninchain.com/subgraphs/name/axieinfinity/katana-v3'
     default:
       return undefined
   }
 }
 
-export const v2SubgraphUrlOverride = (chainId: IChainID) => {
+export const v2SubgraphUrlOverride = (chainId: ChainId) => {
   switch (chainId) {
     case ChainId.MAINNET:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-mainnet/api`
@@ -51,6 +52,8 @@ export const v2SubgraphUrlOverride = (chainId: IChainID) => {
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-blast/api`
     case ChainId.BASE:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-base/api`
+    case ChainId.RONIN_TESTNET:
+      return 'https://saigon-thegraph.roninchain.com/subgraphs/name/axieinfinity/katana-subgraph-green'
     default:
       return undefined
   }
@@ -76,6 +79,20 @@ export const chainProtocols = [
       v3TrackedEthThreshold,
       v3UntrackedUsdThreshold,
       v3SubgraphUrlOverride(ChainId.MAINNET)
+    ),
+  },
+  {
+    protocol: Protocol.V3,
+    chainId: ChainId.RONIN_TESTNET,
+    timeout: 90000,
+    provider: new V3SubgraphProvider(
+      ChainId.RONIN_TESTNET,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.RONIN_TESTNET)
     ),
   },
   {
@@ -206,6 +223,22 @@ export const chainProtocols = [
       v2TrackedEthThreshold,
       v2UntrackedUsdThreshold,
       v2SubgraphUrlOverride(ChainId.MAINNET)
+    ), // 1000 is the largest page size supported by thegraph
+  },
+
+  {
+    protocol: Protocol.V2,
+    chainId: ChainId.RONIN_TESTNET,
+    timeout: 840000,
+    provider: new V2SubgraphProvider(
+      ChainId.RONIN_TESTNET,
+      5,
+      900000,
+      true,
+      1000,
+      v2TrackedEthThreshold,
+      v2UntrackedUsdThreshold,
+      v2SubgraphUrlOverride(ChainId.RONIN_TESTNET)
     ), // 1000 is the largest page size supported by thegraph
   },
   {

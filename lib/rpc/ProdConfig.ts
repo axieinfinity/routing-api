@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi'
 import PROD_CONFIG from '../config/rpcProviderProdConfig.json'
-import { IChainID } from '../../common/override-sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export interface ChainConfig {
   chainId: number
@@ -31,14 +31,14 @@ export const ProdConfigJoi = Joi.array().items(
 )
 
 // Return a map of chain id and its provider names
-export function getRpcGatewayEnabledChains(config?: object): Map<IChainID, string[]> {
+export function getRpcGatewayEnabledChains(config?: object): Map<ChainId, string[]> {
   const prodConfigInput = config ?? PROD_CONFIG
   const validation = ProdConfigJoi.validate(prodConfigInput)
   if (validation.error) {
     throw new Error(`ProdConfig failed data validation: Value: ${prodConfigInput}, Error: ${validation.error.message}`)
   }
   const prodConfig: ProdConfig = validation.value as ProdConfig
-  let result = new Map<IChainID, string[]>()
+  let result = new Map<ChainId, string[]>()
   for (const chainConfig of prodConfig) {
     if (chainConfig.providerUrls) {
       result.set(

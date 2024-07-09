@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core'
+import { ChainId, Token } from '@axieinfinity/sdk-core'
 import {
   CachingGasStationProvider,
   CachingTokenListProvider,
@@ -6,8 +6,6 @@ import {
   CachingV2PoolProvider,
   CachingV3PoolProvider,
   EIP1559GasPriceProvider,
-  EthEstimateGasSimulator,
-  FallbackTenderlySimulator,
   IGasPriceProvider,
   IMetric,
   IOnChainQuoteProvider,
@@ -27,10 +25,8 @@ import {
   OnChainQuoteProvider,
   QUOTER_V2_ADDRESSES,
   setGlobalLogger,
-  Simulator,
   StaticV2SubgraphProvider,
   StaticV3SubgraphProvider,
-  TenderlySimulator,
   TokenPropertiesProvider,
   TokenProvider,
   TokenValidatorProvider,
@@ -38,7 +34,8 @@ import {
   V2PoolProvider,
   V2QuoteProvider,
   V3PoolProvider,
-} from '@uniswap/smart-order-router'
+} from '@axieinfinity/smart-order-router'
+
 import { TokenList } from '@uniswap/token-lists'
 import { default as bunyan, default as Logger } from 'bunyan'
 import _ from 'lodash'
@@ -54,8 +51,6 @@ import { DefaultEVMClient } from './evm/EVMClient'
 import { InstrumentedEVMProvider } from './evm/provider/InstrumentedEVMProvider'
 import { deriveProviderName } from './evm/provider/ProviderName'
 import { V2DynamoCache } from './pools/pool-caching/v2/v2-dynamo-cache'
-import { OnChainTokenFeeFetcher } from '@uniswap/smart-order-router/build/main/providers/token-fee-fetcher'
-import { PortionProvider } from '@uniswap/smart-order-router/build/main/providers/portion-provider'
 import { GlobalRpcProviders } from '../rpc/GlobalRpcProviders'
 import { StaticJsonRpcProvider } from '@ethersproject/providers'
 import { TrafficSwitchOnChainQuoteProvider } from './quote/provider-migration/v3/traffic-switch-on-chain-quote-provider'
@@ -74,9 +69,9 @@ import { UniJsonRpcProvider } from '../rpc/UniJsonRpcProvider'
 import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
-import { IChainID, RoninChainId } from '../../common/override-sdk-core'
+import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/types/providers/token-fee-fetcher'
 
-export const SUPPORTED_CHAINS: IChainID[] = [
+export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.MAINNET,
   ChainId.OPTIMISM,
   ChainId.ARBITRUM_ONE,
@@ -90,7 +85,7 @@ export const SUPPORTED_CHAINS: IChainID[] = [
   ChainId.BLAST,
   ChainId.ZORA,
   ChainId.ZKSYNC,
-  RoninChainId.SAIGON_TESTNET,
+  ChainId.RONIN_TESTNET
 ]
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
@@ -120,7 +115,6 @@ export type ContainerDependencies = {
   multicallProvider: UniswapMulticallProvider
   onChainQuoteProvider?: IOnChainQuoteProvider
   v2QuoteProvider: V2QuoteProvider
-  simulator: Simulator
   routeCachingProvider?: IRouteCachingProvider
   tokenValidatorProvider: TokenValidatorProvider
   tokenPropertiesProvider: ITokenPropertiesProvider
@@ -129,7 +123,7 @@ export type ContainerDependencies = {
 
 export interface ContainerInjected {
   dependencies: {
-    [chainId in IChainID]?: ContainerDependencies
+    [chainId in ChainId]?: ContainerDependencies
   }
   activityId?: string
 }
@@ -163,11 +157,11 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
       } = process.env
 
       const dependenciesByChain: {
-        [chainId in IChainID]?: ContainerDependencies
+        [chainId in ChainId]?: ContainerDependencies
       } = {}
 
       const dependenciesByChainArray = await Promise.all(
-        _.map(SUPPORTED_CHAINS, async (chainId: IChainID) => {
+        _.map(SUPPORTED_CHAINS, async (chainId: ChainId) => {
           let url = ''
           if (!GlobalRpcProviders.getGlobalUniRpcProviders(log).has(chainId)) {
             // Check existence of env var for chain that doesn't use RPC gateway.
@@ -216,16 +210,16 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
 
           const tokenCache = new NodeJSCache<Token>(new NodeCache({ stdTTL: 3600, useClones: false }))
           const blockedTokenCache = new NodeJSCache<Token>(new NodeCache({ stdTTL: 3600, useClones: false }))
-          const multicall2Provider = new UniswapMulticallProvider(chainId as ChainId, provider, 375_000)
+          const multicall2Provider = new UniswapMulticallProvider(chainId, provider, 375_000)
 
-          const noCacheV3PoolProvider = new V3PoolProvider(chainId as ChainId, multicall2Provider)
+          const noCacheV3PoolProvider = new V3PoolProvider(chainId, multicall2Provider)
           const inMemoryCachingV3PoolProvider = new CachingV3PoolProvider(
-            chainId as ChainId,
+            chainId,
             noCacheV3PoolProvider,
             new NodeJSCache(new NodeCache({ stdTTL: 180, useClones: false }))
           )
           const dynamoCachingV3PoolProvider = new DynamoDBCachingV3PoolProvider(
-            chainId as ChainId,
+            chainId,
             noCacheV3PoolProvider,
             'V3PoolsCachingDB'
           )
@@ -236,7 +230,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             sourceOfTruthPoolProvider: noCacheV3PoolProvider,
           })
 
-          const onChainTokenFeeFetcher = new OnChainTokenFeeFetcher(chainId as ChainId, provider)
+          const onChainTokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider)
           const graphQLTokenFeeFetcher = new GraphQLTokenFeeFetcher(
             new UniGraphQLProvider(),
             onChainTokenFeeFetcher,
@@ -254,18 +248,18 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           })
 
           const tokenValidatorProvider = new TokenValidatorProvider(
-            chainId as ChainId,
+            chainId,
             multicall2Provider,
             new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false }))
           )
           const tokenPropertiesProvider = new TokenPropertiesProvider(
-            chainId as ChainId,
+            chainId,
             new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false })),
             trafficSwitcherTokenFetcher
           )
-          const underlyingV2PoolProvider = new V2PoolProvider(chainId as ChainId, multicall2Provider, tokenPropertiesProvider)
+          const underlyingV2PoolProvider = new V2PoolProvider(chainId, multicall2Provider, tokenPropertiesProvider)
           const v2PoolProvider = new CachingV2PoolProvider(
-            chainId as ChainId,
+            chainId,
             underlyingV2PoolProvider,
             new V2DynamoCache(V2_PAIRS_CACHE_TABLE_NAME!)
           )
@@ -287,7 +281,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
                   return await V3AWSSubgraphProvider.EagerBuild(POOL_CACHE_BUCKET_3!, POOL_CACHE_GZIP_KEY!, chainId)
                 } catch (err) {
                   log.error({ err }, 'AWS Subgraph Provider unavailable, defaulting to Static Subgraph Provider')
-                  return new StaticV3SubgraphProvider(chainId as ChainId, v3PoolProvider)
+                  return new StaticV3SubgraphProvider(chainId, v3PoolProvider)
                 }
               })(),
               (async () => {
@@ -302,16 +296,16 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
 
                   return await V2AWSSubgraphProvider.EagerBuild(POOL_CACHE_BUCKET_3!, POOL_CACHE_GZIP_KEY!, chainId)
                 } catch (err) {
-                  return new StaticV2SubgraphProvider(chainId as ChainId)
+                  return new StaticV2SubgraphProvider(chainId)
                 }
               })(),
             ])
 
           const tokenProvider = new CachingTokenProviderWithFallback(
-            chainId as ChainId,
+            chainId,
             tokenCache,
             tokenListProvider,
-            new TokenProvider(chainId as ChainId, multicall2Provider)
+            new TokenProvider(chainId, multicall2Provider)
           )
 
           // Some providers like Infura set a gas limit per call of 10x block gas which is approx 150m
@@ -331,9 +325,9 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             case ChainId.BLAST:
             case ChainId.ZORA:
             case ChainId.ZKSYNC:
-            case RoninChainId.SAIGON_TESTNET:
+            case ChainId.RONIN_TESTNET:
               const currentQuoteProvider = new OnChainQuoteProvider(
-                chainId as ChainId,
+                chainId,
                 provider,
                 multicall2Provider,
                 RETRY_OPTIONS[chainId],
@@ -351,7 +345,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
                   useMixedRouteQuoter ? MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId] : QUOTER_V2_ADDRESSES[chainId]
               )
               const targetQuoteProvider = new OnChainQuoteProvider(
-                chainId as ChainId,
+                chainId,
                 provider,
                 multicall2Provider,
                 RETRY_OPTIONS[chainId],
@@ -379,41 +373,6 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               break
           }
 
-          const portionProvider = new PortionProvider()
-          const tenderlySimulator = new TenderlySimulator(
-            chainId as ChainId, 
-            'https://api.tenderly.co',
-            process.env.TENDERLY_USER!,
-            process.env.TENDERLY_PROJECT!,
-            process.env.TENDERLY_ACCESS_KEY!,
-            process.env.TENDERLY_NODE_API_KEY!,
-            v2PoolProvider,
-            v3PoolProvider,
-            provider,
-            portionProvider,
-            undefined,
-            // The timeout for the underlying axios call to Tenderly, measured in milliseconds.
-            2.5 * 1000,
-            20,
-            [ChainId.MAINNET]
-          )
-
-          const ethEstimateGasSimulator = new EthEstimateGasSimulator(
-            chainId as ChainId,
-            provider,
-            v2PoolProvider,
-            v3PoolProvider,
-            portionProvider
-          )
-
-          const simulator = new FallbackTenderlySimulator(
-            chainId as ChainId,
-            provider,
-            portionProvider,
-            tenderlySimulator,
-            ethEstimateGasSimulator
-          )
-
           let routeCachingProvider: IRouteCachingProvider | undefined = undefined
           if (CACHED_ROUTES_TABLE_NAME && CACHED_ROUTES_TABLE_NAME !== '') {
             routeCachingProvider = new DynamoRouteCachingProvider({
@@ -432,8 +391,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             ChainId.BNB,
             ChainId.AVALANCHE,
             ChainId.BLAST,
-            RoninChainId.SAIGON_TESTNET
-          ] as ChainId[]
+            ChainId.RONIN_TESTNET
+          ]
 
           return {
             chainId,
@@ -445,9 +404,9 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               tokenProvider,
               tokenProviderFromTokenList: tokenListProvider,
               gasPriceProvider: new CachingGasStationProvider(
-                chainId as ChainId,
+                chainId,
                 new OnChainGasPriceProvider(
-                  chainId as ChainId,
+                  chainId,
                   new EIP1559GasPriceProvider(provider),
                   new LegacyGasPriceProvider(provider)
                 ),
@@ -459,7 +418,6 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               v2PoolProvider,
               v2QuoteProvider: new V2QuoteProvider(),
               v2SubgraphProvider,
-              simulator,
               routeCachingProvider,
               tokenValidatorProvider,
               tokenPropertiesProvider,

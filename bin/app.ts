@@ -11,7 +11,8 @@ import 'source-map-support/register'
 import { SUPPORTED_CHAINS } from '../lib/handlers/injector-sor'
 import { STAGE } from '../lib/util/stage'
 import { RoutingAPIStack } from './stacks/routing-api-stack'
-import {IChainID} from '../common/override-sdk-core'
+import { ChainId } from "@axieinfinity/sdk-core"
+
 dotenv.config()
 
 export class RoutingAPIStage extends Stage {
@@ -179,7 +180,7 @@ export class RoutingAPIPipeline extends Stack {
 
     // Load RPC provider URLs from AWS secret
     let jsonRpcProviders = {} as { [chainId: string]: string }
-    SUPPORTED_CHAINS.forEach((chainId: IChainID) => {
+    SUPPORTED_CHAINS.forEach((chainId: ChainId) => {
       const key = `WEB3_RPC_${chainId}`
       jsonRpcProviders[key] = jsonRpcProvidersSecret.secretValueFromJson(key).toString()
       new CfnOutput(this, key, {

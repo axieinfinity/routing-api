@@ -1,7 +1,6 @@
-import { ChainId } from '@uniswap/sdk-core'
-import { IChainID, RoninChainId } from '../../common/override-sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 
-export function chainIdToNetworkName(networkId: IChainID): string {
+export function chainIdToNetworkName(networkId: ChainId): string {
   switch (networkId) {
     case ChainId.MAINNET:
       return 'ethereum'
@@ -19,8 +18,7 @@ export function chainIdToNetworkName(networkId: IChainID): string {
       return 'avalanchec'
     case ChainId.BASE:
       return 'base'
-    case RoninChainId.RONIN_MAINNET:
-    case RoninChainId.SAIGON_TESTNET:
+    case ChainId.RONIN_TESTNET:
       return 'ronin'
     default:
       return 'ethereum'
@@ -138,6 +136,6 @@ export function generateProviderUrl(key: string, value: string): string {
   throw new Error(`Unknown provider-chainId pair: ${key}`)
 }
 
-export function getProviderId(chainId: IChainID, providerName: string): string {
+export function getProviderId(chainId: ChainId, providerName: string): string {
   return `${chainId.toString()}_${providerName}`
 }

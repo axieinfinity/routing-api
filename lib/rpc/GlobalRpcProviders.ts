@@ -10,12 +10,12 @@ import {
 import { ProdConfig, ProdConfigJoi } from './ProdConfig'
 import { chainIdToNetworkName, generateProviderUrl } from './utils'
 import PROD_CONFIG from '../config/rpcProviderProdConfig.json'
-import { IChainID } from '../../common/override-sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export class GlobalRpcProviders {
-  private static SINGLE_RPC_PROVIDERS: Map<IChainID, SingleJsonRpcProvider[]> | null = null
+  private static SINGLE_RPC_PROVIDERS: Map<ChainId, SingleJsonRpcProvider[]> | null = null
 
-  private static UNI_RPC_PROVIDERS: Map<IChainID, UniJsonRpcProvider> | null = null
+  private static UNI_RPC_PROVIDERS: Map<ChainId, UniJsonRpcProvider> | null = null
 
   private static validateProdConfig(config?: object): ProdConfig {
     const prodConfigInput = config !== undefined ? config : PROD_CONFIG
@@ -48,7 +48,7 @@ export class GlobalRpcProviders {
   ) {
     GlobalRpcProviders.SINGLE_RPC_PROVIDERS = new Map()
     for (const chainConfig of prodConfig) {
-      const chainId = chainConfig.chainId as IChainID
+      const chainId = chainConfig.chainId as ChainId
       if (Math.random() < chainConfig.useMultiProviderProb) {
         let providers: SingleJsonRpcProvider[] = []
         for (const providerUrl of chainConfig.providerUrls!) {
@@ -80,7 +80,7 @@ export class GlobalRpcProviders {
 
     GlobalRpcProviders.UNI_RPC_PROVIDERS = new Map()
     for (const chainConfig of prodConfig) {
-      const chainId = chainConfig.chainId as IChainID
+      const chainId = chainConfig.chainId as ChainId
       if (!GlobalRpcProviders.SINGLE_RPC_PROVIDERS!.has(chainId)) {
         continue
       }
@@ -104,7 +104,7 @@ export class GlobalRpcProviders {
   static getGlobalSingleRpcProviders(
     log: Logger,
     singleConfig: SingleJsonRpcProviderConfig = DEFAULT_SINGLE_PROVIDER_CONFIG
-  ): Map<IChainID, SingleJsonRpcProvider[]> {
+  ): Map<ChainId, SingleJsonRpcProvider[]> {
     const prodConfig = GlobalRpcProviders.validateProdConfig()
     if (GlobalRpcProviders.SINGLE_RPC_PROVIDERS === null) {
       GlobalRpcProviders.initGlobalSingleRpcProviders(log, prodConfig, singleConfig)
@@ -117,7 +117,7 @@ export class GlobalRpcProviders {
     uniConfig: UniJsonRpcProviderConfig = DEFAULT_UNI_PROVIDER_CONFIG,
     singleConfig: SingleJsonRpcProviderConfig = DEFAULT_SINGLE_PROVIDER_CONFIG,
     prodConfigJson?: any
-  ): Map<IChainID, UniJsonRpcProvider> {
+  ): Map<ChainId, UniJsonRpcProvider> {
     const prodConfig = GlobalRpcProviders.validateProdConfig(prodConfigJson)
     if (GlobalRpcProviders.UNI_RPC_PROVIDERS === null) {
       GlobalRpcProviders.initGlobalUniRpcProviders(log, prodConfig, uniConfig, singleConfig)

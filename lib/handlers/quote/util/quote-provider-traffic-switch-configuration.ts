@@ -1,5 +1,4 @@
-import { ChainId } from '@uniswap/sdk-core'
-import { IChainID } from '../../../../common/override-sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export type QuoteProviderTrafficSwitchConfiguration = {
   switchExactInPercentage: number
@@ -9,7 +8,7 @@ export type QuoteProviderTrafficSwitchConfiguration = {
 }
 
 export const QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION = (
-  chainId: IChainID
+  chainId: ChainId
 ): QuoteProviderTrafficSwitchConfiguration => {
   switch (chainId) {
     // Mumbai was deprecated on April 13th. Do not sample at all
@@ -94,6 +93,14 @@ export const QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION = (
       } as QuoteProviderTrafficSwitchConfiguration
     case ChainId.AVALANCHE:
       // Avalanche RPC eth_call traffic is about 1/100 of mainnet, so we can shadow sample 10% of traffic
+      return {
+        switchExactInPercentage: 100,
+        samplingExactInPercentage: 0,
+        switchExactOutPercentage: 100,
+        samplingExactOutPercentage: 0,
+      } as QuoteProviderTrafficSwitchConfiguration
+    // If we accidentally switch a traffic, we have the protection to shadow sample only 0.1% of traffic
+    case ChainId.RONIN_TESTNET:
       return {
         switchExactInPercentage: 100,
         samplingExactInPercentage: 0,

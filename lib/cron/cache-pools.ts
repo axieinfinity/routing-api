@@ -6,10 +6,10 @@ import {
   V2SubgraphProvider,
   V3SubgraphPool,
   V3SubgraphProvider,
-} from '@uniswap/smart-order-router'
+} from '@axieinfinity/smart-order-router'
 import { EventBridgeEvent, ScheduledHandler } from 'aws-lambda'
 import { S3 } from 'aws-sdk'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 import { default as bunyan, default as Logger } from 'bunyan'
 import { S3_POOL_CACHE_KEY } from '../util/pool-cache-key'
 import {
@@ -23,7 +23,6 @@ import { AWSMetricsLogger } from '../handlers/router-entities/aws-metrics-logger
 import { metricScope } from 'aws-embedded-metrics'
 import * as zlib from 'zlib'
 import dotenv from 'dotenv'
-import { IChainID } from '../../common/override-sdk-core'
 
 // Needed for local stack dev, not needed for staging or prod
 // But it still doesn't work on the local cdk stack update,
@@ -37,7 +36,7 @@ const handler: ScheduledHandler = metricScope((metrics) => async (event: EventBr
   const metric = new AWSMetricsLogger(metrics)
   setGlobalMetric(metric)
 
-  const chainId: IChainID = parseInt(process.env.chainId!)
+  const chainId: ChainId = parseInt(process.env.chainId!)
   const protocol = process.env.protocol! as Protocol
   // Don't retry for V2 as it will timeout and throw 500
   const provider = chainProtocols.find(

@@ -1,12 +1,11 @@
 import { WidgetsFactory } from './core/widgets-factory'
 import { Widget } from './core/model/widget'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 import _ from 'lodash'
-import { ID_TO_NETWORK_NAME } from '@uniswap/smart-order-router/build/main/util/chains'
 import { ProviderName } from '../handlers/evm/provider/ProviderName'
-import { IChainID } from '../../common/override-sdk-core'
+import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
 
-const ID_TO_PROVIDER = (id: IChainID): string => {
+const ID_TO_PROVIDER = (id: ChainId): string => {
   switch (id) {
     case ChainId.MAINNET:
     case ChainId.OPTIMISM:
@@ -32,9 +31,9 @@ const ID_TO_PROVIDER = (id: IChainID): string => {
 export class RpcProvidersWidgetsFactory implements WidgetsFactory {
   region: string
   namespace: string
-  chains: Array<IChainID>
+  chains: Array<ChainId>
 
-  constructor(namespace: string, region: string, chains: Array<IChainID>) {
+  constructor(namespace: string, region: string, chains: Array<ChainId>) {
     this.namespace = namespace
     this.region = region
     this.chains = chains

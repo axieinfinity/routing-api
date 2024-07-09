@@ -7,7 +7,7 @@ import {
   setGlobalLogger,
   setGlobalMetric,
   V3HeuristicGasModelFactory,
-} from '@uniswap/smart-order-router'
+} from '@axieinfinity/smart-order-router'
 import { MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import { default as bunyan, default as Logger } from 'bunyan'
@@ -96,7 +96,6 @@ export class QuoteHandlerInjector extends InjectorSOR<
       v2QuoteProvider,
       v2SubgraphProvider,
       gasPriceProvider: gasPriceProviderOnChain,
-      simulator,
       routeCachingProvider,
       v2Supported,
     } = dependencies[chainIdEnum]!
@@ -126,7 +125,6 @@ export class QuoteHandlerInjector extends InjectorSOR<
           v2PoolProvider,
           v2QuoteProvider,
           v2SubgraphProvider,
-          simulator,
           routeCachingProvider,
           tokenValidatorProvider,
           tokenPropertiesProvider,

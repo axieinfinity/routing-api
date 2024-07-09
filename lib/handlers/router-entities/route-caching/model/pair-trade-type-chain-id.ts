@@ -1,5 +1,5 @@
-import { ChainId, TradeType } from '@uniswap/sdk-core'
-import { CachedRoutes } from '@uniswap/smart-order-router'
+import { ChainId, TradeType } from '@axieinfinity/sdk-core'
+import { CachedRoutes } from '@axieinfinity/smart-order-router'
 
 interface PairTradeTypeChainIdArgs {
   tokenIn: string

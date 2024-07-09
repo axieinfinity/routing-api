@@ -1,30 +1,28 @@
-import { IOnChainQuoteProvider, log, metric, MetricLoggerUnit, OnChainQuotes } from '@uniswap/smart-order-router'
-import { MixedRoute, V2Route, V3Route } from '@uniswap/smart-order-router/build/main/routers'
-import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
-import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
+import { IOnChainQuoteProvider, log, metric, MetricLoggerUnit, MixedRoute, OnChainQuotes, V2Route, V3Route } from '@axieinfinity/smart-order-router'
+import { ChainId, Currency, CurrencyAmount } from '@axieinfinity/sdk-core'
 import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../../util/quote-provider-traffic-switch-configuration'
 import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../../util/onChainQuoteProviderConfigs'
-import { IChainID } from '../../../../../common/override-sdk-core'
+import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/types/providers/provider'
 
 export type TrafficSwitchOnChainQuoteProviderProps = {
   currentQuoteProvider: IOnChainQuoteProvider
   targetQuoteProvider: IOnChainQuoteProvider
-  chainId: IChainID
+  chainId: ChainId
 }
 
 export class TrafficSwitchOnChainQuoteProvider implements IOnChainQuoteProvider {
   private readonly currentQuoteProvider: IOnChainQuoteProvider
   private readonly targetQuoteProvider: IOnChainQuoteProvider
-  private readonly chainId: IChainID
+  private readonly chainId: ChainId
 
-  protected readonly SHOULD_SWITCH_EXACT_IN_TRAFFIC = (chainId: IChainID) =>
+  protected readonly SHOULD_SWITCH_EXACT_IN_TRAFFIC = (chainId: ChainId) =>
     QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION(chainId).switchExactInPercentage > this.getRandomPercentage()
-  protected readonly SHOULD_SAMPLE_EXACT_IN_TRAFFIC = (chainId: IChainID) =>
+  protected readonly SHOULD_SAMPLE_EXACT_IN_TRAFFIC = (chainId: ChainId) =>
     QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION(chainId).samplingExactInPercentage > this.getRandomPercentage()
-  protected readonly SHOULD_SWITCH_EXACT_OUT_TRAFFIC = (chainId: IChainID) =>
+  protected readonly SHOULD_SWITCH_EXACT_OUT_TRAFFIC = (chainId: ChainId) =>
     QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION(chainId).switchExactOutPercentage > this.getRandomPercentage()
-  protected readonly SHOULD_SAMPLE_EXACT_OUT_TRAFFIC = (chainId: IChainID) =>
+  protected readonly SHOULD_SAMPLE_EXACT_OUT_TRAFFIC = (chainId: ChainId) =>
     QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION(chainId).samplingExactOutPercentage > this.getRandomPercentage()
 
   private readonly EXACT_IN_METRIC = 'EXACT_IN'
