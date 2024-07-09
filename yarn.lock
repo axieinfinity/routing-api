@@ -89,10 +89,10 @@
     tiny-invariant "^1.1.0"
     toformat "^2.0.0"
 
-"@axieinfinity/smart-order-router@0.0.2":
-  version "0.0.2"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.2/2a57c6f83902d135c2fbab147bd2d50f3248ab0c#2a57c6f83902d135c2fbab147bd2d50f3248ab0c"
-  integrity sha512-A/x7sUmjRCsoJ2eJnsK2l8vuDQuZN+q42k2CdiIMOKQfdoddMenChW1EAy0+dtBqsdNGScjitEf7DA5gFTUncQ==
+"@axieinfinity/smart-order-router@0.0.3":
+  version "0.0.3"
+  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.3/8355debb5b15ad5411654bf31f242d1be8989416#8355debb5b15ad5411654bf31f242d1be8989416"
+  integrity sha512-JlyUJ8Gg4sNDpMqN2i+J2eaPusHqlGAyrjDeXLmJ0rwQBlM+r1UDFxTgdIp8orFTzWb9mc6Ltla7fhhbKQXV+w==
   dependencies:
     "@axieinfinity/sdk-core" "0.0.1"
     "@eth-optimism/sdk" "^3.2.2"
