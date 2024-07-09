@@ -35,6 +35,7 @@ export class RpcGatewayFallbackStack extends cdk.NestedStack {
       role: lambdaRole,
       runtime: aws_lambda.Runtime.NODEJS_18_X,
       entry: path.join(__dirname, '../../lib/rpc/handler/index.ts'),
+      depsLockFilePath: 'package-lock.json',
       handler: 'fallbackHandler',
       timeout: cdk.Duration.seconds(15),
       memorySize: 1024,
