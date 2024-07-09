@@ -3,7 +3,7 @@ import { ChainId, Currency, CurrencyAmount } from '@axieinfinity/sdk-core'
 import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../../util/quote-provider-traffic-switch-configuration'
 import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../../util/onChainQuoteProviderConfigs'
-import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/types/providers/provider'
+import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
 
 export type TrafficSwitchOnChainQuoteProviderProps = {
   currentQuoteProvider: IOnChainQuoteProvider

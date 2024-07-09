@@ -69,7 +69,7 @@ import { UniJsonRpcProvider } from '../rpc/UniJsonRpcProvider'
 import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
-import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/types/providers/token-fee-fetcher'
+import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
 
 export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.MAINNET,

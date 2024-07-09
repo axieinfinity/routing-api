@@ -9,7 +9,7 @@ import {
   DEFAULT_GAS_ERROR_FAILURE_OVERRIDES,
   DEFAULT_RETRY_OPTIONS,
   DEFAULT_SUCCESS_RATE_FAILURE_OVERRIDES,
-} from '@axieinfinity/smart-order-router/dist/types/util/onchainQuoteProviderConfigs'
+} from '@axieinfinity/smart-order-router/dist/main/util/onchainQuoteProviderConfigs'
 import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@axieinfinity/sdk-core'
 import AsyncRetry from 'async-retry'
 import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@axieinfinity/smart-order-router'

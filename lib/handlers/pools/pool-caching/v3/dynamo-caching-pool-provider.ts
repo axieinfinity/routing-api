@@ -3,7 +3,7 @@ import { ChainId, Token } from '@axieinfinity/sdk-core'
 import { FeeAmount, Pool } from '@uniswap/v3-sdk'
 import { IDynamoCache } from '../cache-dynamo'
 import { DynamoCachingV3Pool } from './cache-dynamo-pool'
-import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/types/providers/provider'
+import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
 
 export class DynamoDBCachingV3PoolProvider implements IV3PoolProvider {
   private readonly dynamoCache: IDynamoCache<string, number, Pool>
