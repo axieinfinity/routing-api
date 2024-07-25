@@ -388,7 +388,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             currencyOut.symbol
           }. Chain: ${chainId}`
         )
-
+        metric.putMetric(`TestQuote-${JSON.stringify(swapParams)}-${JSON.stringify(routingConfig)}`, 1, MetricLoggerUnit.Count)
         swapRoute = await router.route(amount, currencyOut, TradeType.EXACT_INPUT, swapParams, routingConfig)
         break
       case 'exactOut':
