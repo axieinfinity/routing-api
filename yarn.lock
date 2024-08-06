@@ -74,10 +74,10 @@
     "@smithy/types" "^3.1.0"
     tslib "^2.6.2"
 
-"@axieinfinity/sdk-core@0.0.5":
-  version "0.0.5"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/sdk-core/0.0.5/c7d88c36d50c56f2807f12d5c789a2d1e344fd04#c7d88c36d50c56f2807f12d5c789a2d1e344fd04"
-  integrity sha512-t45Sj3ZXWh10AfKcZfkh/c1g6CGn50Q7uTCqHd9VjG6ldGdj7zD0/sSv6G2CQxZm9AJsE2gBNMSJwe2AyuXBGw==
+"@axieinfinity/sdk-core@0.0.6":
+  version "0.0.6"
+  resolved "https://npm.pkg.github.com/download/@axieinfinity/sdk-core/0.0.6/b9d78ccd1057a3a8b5fe69e91ab6bdede0693262#b9d78ccd1057a3a8b5fe69e91ab6bdede0693262"
+  integrity sha512-JhPZdU3zQYchwytoDE6QQgvsoANJ2VM0/DTRADuG6rm6gMQFuPbhw5XOLTYwYysuUdhHP1/OsfeCg9Gppmha/A==
   dependencies:
     "@ethersproject/address" "^5.0.2"
     "@ethersproject/bytes" "^5.7.0"
@@ -89,12 +89,12 @@
     tiny-invariant "^1.1.0"
     toformat "^2.0.0"
 
-"@axieinfinity/smart-order-router@0.0.9":
-  version "0.0.9"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.9/1449296f143a016b8dbf84f240d2787c63ecb779#1449296f143a016b8dbf84f240d2787c63ecb779"
-  integrity sha512-Bq4qITFnSWEL2Pewa7iCwQQ96mVDjWqEk6k57Hkh2RDeEYmV0KsRXRF/5N3CUHtH9q0Nvi7Kt3N6pRpVHvqWQw==
+"@axieinfinity/smart-order-router@0.0.10":
+  version "0.0.10"
+  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.10/3f30775c09f49a5115ae7f003b29d81678eb4203#3f30775c09f49a5115ae7f003b29d81678eb4203"
+  integrity sha512-5AJyB2Bi3zlcIV6A433xv6KRyfQ0SVEv58cECSiI9kjmfOn4XMkNgwKXIfEvkZblzheBLSiYGCTDBAiuevJPew==
   dependencies:
-    "@axieinfinity/sdk-core" "0.0.5"
+    "@axieinfinity/sdk-core" "0.0.6"
     "@eth-optimism/sdk" "^3.2.2"
     "@types/brotli" "^1.3.4"
     "@uniswap/default-token-list" "^11.13.0"
@@ -109,7 +109,6 @@
     async-retry "^1.3.1"
     await-timeout "^1.1.1"
     axios "^0.21.1"
-    brotli "^1.3.3"
     bunyan "^1.8.15"
     bunyan-blackhole "^1.1.1"
     ethers "^5.7.2"
@@ -3872,7 +3871,7 @@ base-x@^3.0.2, base-x@^3.0.8:
   dependencies:
     safe-buffer "^5.0.1"
 
-base64-js@^1.0.2, base64-js@^1.1.2, base64-js@^1.3.1:
+base64-js@^1.0.2, base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
@@ -4046,13 +4045,6 @@ brorand@^1.0.1, brorand@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/brorand/-/brorand-1.1.0.tgz"
   integrity sha512-cKV8tMCEpQs4hK/ik71d6LrPOnpkpGBR0wzxqr68g2m/LB2GxVYQroAjMJZRVM1Y4BCjCKc3vAamxSzOY2RP+w==
-
-brotli@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.npmjs.org/brotli/-/brotli-1.3.3.tgz"
-  integrity sha512-oTKjJdShmDuGW94SyyaoQvAjf30dZaHnjJ8uAF+u2/vGJkJbJPJAT1gDiOJP5v1Zb6f9KEyW/1HpuaWIXtGHPg==
-  dependencies:
-    base64-js "^1.1.2"
 
 browser-stdout@1.3.1:
   version "1.3.1"
