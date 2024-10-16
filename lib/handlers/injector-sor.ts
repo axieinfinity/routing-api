@@ -60,7 +60,7 @@ import { UniJsonRpcProvider } from '../rpc/UniJsonRpcProvider'
 import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
-import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/module/providers/token-fee-fetcher'
+import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
 
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
