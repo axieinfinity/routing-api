@@ -10,12 +10,13 @@ const v2UntrackedUsdThreshold = Number.MAX_VALUE // Pairs need at least 1K USD (
 
 export const chainProtocols = [
   // V3.
-  {
-    protocol: Protocol.V3,
-    chainId: ChainId.mainnet,
-    timeout: 90000,
-    provider: new V3SubgraphProvider(ChainId.mainnet, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
-  },
+  // TODO: Uncomment when mainnet subgraph is ready.
+  // {
+  //   protocol: Protocol.V3,
+  //   chainId: ChainId.mainnet,
+  //   timeout: 90000,
+  //   provider: new V3SubgraphProvider(ChainId.mainnet, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
+  // },
 
   {
     protocol: Protocol.V3,
