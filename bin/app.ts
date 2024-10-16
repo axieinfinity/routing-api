@@ -8,10 +8,9 @@ import { CodeBuildStep, CodePipeline, CodePipelineSource } from 'aws-cdk-lib/pip
 import { Construct } from 'constructs'
 import dotenv from 'dotenv'
 import 'source-map-support/register'
-import { SUPPORTED_CHAINS } from '../lib/handlers/injector-sor'
 import { STAGE } from '../lib/util/stage'
 import { RoutingAPIStack } from './stacks/routing-api-stack'
-import { ChainId } from "@axieinfinity/sdk-core"
+import { SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
 
 dotenv.config()
 
@@ -180,7 +179,7 @@ export class RoutingAPIPipeline extends Stack {
 
     // Load RPC provider URLs from AWS secret
     let jsonRpcProviders = {} as { [chainId: string]: string }
-    SUPPORTED_CHAINS.forEach((chainId: ChainId) => {
+    SUPPORTED_CHAINS.forEach((chainId) => {
       const key = `WEB3_RPC_${chainId}`
       jsonRpcProviders[key] = jsonRpcProvidersSecret.secretValueFromJson(key).toString()
       new CfnOutput(this, key, {

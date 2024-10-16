@@ -17,7 +17,7 @@ import Logger from 'bunyan'
 import { UniJsonRpcProviderConfig } from './config'
 
 export class UniJsonRpcProvider extends StaticJsonRpcProvider {
-  readonly chainId: ChainId = ChainId.MAINNET
+  readonly chainId: ChainId
 
   private readonly providers: SingleJsonRpcProvider[] = []
 

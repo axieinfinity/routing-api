@@ -1,4 +1,4 @@
-import { Token } from '@axieinfinity/sdk-core'
+import { Token } from '@uniswap/sdk-core'
 import { BigNumber } from 'ethers'
 
 export interface MarshalledToken {

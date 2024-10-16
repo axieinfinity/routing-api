@@ -1,4 +1,4 @@
-import { log, metric, MetricLoggerUnit } from '@axieinfinity/smart-order-router'
+import { log, metric, MetricLoggerUnit } from "@axieinfinity/smart-order-router"
 
 export interface TrafficSwitcherProps<TExperiment> {
   control: TExperiment

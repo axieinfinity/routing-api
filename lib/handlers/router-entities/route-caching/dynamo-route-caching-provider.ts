@@ -10,12 +10,13 @@ import {
   routeToString,
 } from '@axieinfinity/smart-order-router'
 import { AWSError, DynamoDB, Lambda } from 'aws-sdk'
-import { ChainId, Currency, CurrencyAmount, Fraction, Token, TradeType } from '@axieinfinity/sdk-core'
+import {  Currency, CurrencyAmount, Fraction, Token, TradeType } from '@uniswap/sdk-core'
 import { Protocol } from '@uniswap/router-sdk'
 import { PairTradeTypeChainId } from './model/pair-trade-type-chain-id'
 import { CachedRoutesMarshaller } from '../../marshalling/cached-routes-marshaller'
 import { MixedRoute, V2Route, V3Route } from '@axieinfinity/smart-order-router'
 import { PromiseResult } from 'aws-sdk/lib/request'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 interface ConstructorParams {
   /**
@@ -48,33 +49,6 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
   // divide those two
   private readonly DEFAULT_BLOCKS_TO_LIVE_ROUTES_DB = (chainId: ChainId) => {
     switch (chainId) {
-      // https://dune.com/queries/2138021
-      case ChainId.ARBITRUM_ONE:
-        return 100
-
-      // https://dune.com/queries/2009572
-      case ChainId.BASE:
-      case ChainId.OPTIMISM:
-        return 60
-
-      // https://snowtrace.io/chart/blocktime
-      case ChainId.AVALANCHE:
-        return 15
-
-      // https://dune.com/KARTOD/blockchains-analysis
-      case ChainId.BNB:
-        return 10
-
-      // https://dune.com/KARTOD/blockchains-analysis
-      case ChainId.POLYGON:
-        return 15
-
-      //  https://explorer.celo.org/mainnet/
-      case ChainId.CELO:
-        return 6
-
-      // https://dune.com/KARTOD/blockchains-analysis
-      case ChainId.MAINNET:
       default:
         return 2
     }
@@ -82,7 +56,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
   // For the Ratio we are approximating Phi (Golden Ratio) by creating a fraction with 2 consecutive Fibonacci numbers
   private readonly ROUTES_DB_BUCKET_RATIO: Fraction = new Fraction(514229, 317811)
   private readonly ROUTES_TO_TAKE_FROM_ROUTES_DB = 8
-  private readonly BLOCKS_DIFF_BETWEEN_CACHING_QUOTES: Map<ChainId, number> = new Map([[ChainId.MAINNET, 3]])
+  private readonly BLOCKS_DIFF_BETWEEN_CACHING_QUOTES: Map<ChainId, number> = new Map([])
 
   private readonly DEFAULT_BLOCKS_DIFF_CACHING = 15
 

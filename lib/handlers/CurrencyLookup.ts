@@ -1,7 +1,8 @@
-import { Currency, Token } from '@axieinfinity/sdk-core'
-import { ITokenListProvider, ITokenProvider, NATIVE_NAMES_BY_ID, nativeOnChain } from '@axieinfinity/smart-order-router'
+import { Currency, Token } from '@uniswap/sdk-core'
+import { ITokenListProvider, ITokenProvider, NATIVE_NAMES_BY_ID } from '@axieinfinity/smart-order-router'
 import Logger from 'bunyan'
 import { isAddress } from '../util/isAddress'
+import { RON } from '@axieinfinity/sdk-core'
 
 /**
  * CurrencyLookup searches native tokens, token lists, and on chain to determine
@@ -34,7 +35,7 @@ export class CurrencyLookup {
       return undefined
     }
 
-    const nativeToken = nativeOnChain(chainId)
+    const nativeToken = RON.onChain(chainId)
     this.log.debug(
       {
         tokenAddress: nativeToken.wrapped.address,

@@ -30,14 +30,10 @@ export class UniGraphQLProvider implements IUniGraphQLProvider {
     this.client = new GraphQLClient(this.endpoint, this.headers)
   }
 
-  /* Convert ChainId to a string recognized by data-graph-api graphql endpoint.
-   *  GraphQL Chain Enum located here: https://github.com/Uniswap/data-api-graphql/blob/main/graphql/schema.graphql#L155
-   *  */
+  /* Convert ChainId to a string recognized by data-graph-api graphql endpoint. */
   private _chainIdToGraphQLChainName(chainId: ChainId): string | undefined {
-    // TODO: add complete list / use data-graphql-api to populate. Only MAINNET for now.
+    // TODO: add complete list / use data-graphql-api to populate.
     switch (chainId) {
-      case ChainId.MAINNET:
-        return 'ETHEREUM'
       default:
         throw new Error(`UniGraphQLProvider._chainIdToGraphQLChainName unsupported ChainId: ${chainId}`)
     }

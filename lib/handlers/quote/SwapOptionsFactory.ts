@@ -1,10 +1,11 @@
-import { ChainId, Currency, CurrencyAmount, UNIVERSAL_ROUTER_ADDRESS } from '@axieinfinity/sdk-core'
-import { SwapOptions, SwapOptionsSwapRouter02, SwapOptionsUniversalRouter, SwapType } from '@axieinfinity/smart-order-router'
+import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import JSBI from 'jsbi'
 import { TradeTypeParam } from './schema/quote-schema'
 import { computePortionAmount, parseDeadline, parseSlippageTolerance, populateFeeOptions } from '../shared'
 import { PermitSingle } from '@uniswap/permit2-sdk'
 import { utils } from 'ethers'
+import { ChainId, UNIVERSAL_ROUTER_ADDRESS } from '@axieinfinity/sdk-core'
+import { SwapOptionsUniversalRouter, SwapType, SwapOptionsSwapRouter02, SwapOptions } from '@axieinfinity/smart-order-router'
 
 export type SwapOptionsUniversalRouterInput = {
   chainId: ChainId
@@ -144,7 +145,7 @@ export class SwapOptionsFactory {
           expiration: permitExpiration,
           nonce: permitNonce,
         },
-        spender: UNIVERSAL_ROUTER_ADDRESS(chainId),
+        spender: UNIVERSAL_ROUTER_ADDRESS[chainId],
         sigDeadline: permitSigDeadline,
       }
 

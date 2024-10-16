@@ -1,8 +1,9 @@
 import { CachedRoutes } from '@axieinfinity/smart-order-router'
-import { ChainId, TradeType } from '@axieinfinity/sdk-core'
+import { TradeType } from '@uniswap/sdk-core'
 import { Protocol } from '@uniswap/router-sdk'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 import { CachedRouteMarshaller, MarshalledCachedRoute } from './cached-route-marshaller'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export interface MarshalledCachedRoutes {
   routes: MarshalledCachedRoute[]

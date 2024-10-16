@@ -7,22 +7,6 @@ import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
 
 const ID_TO_PROVIDER = (id: ChainId): string => {
   switch (id) {
-    case ChainId.MAINNET:
-    case ChainId.OPTIMISM:
-    case ChainId.SEPOLIA:
-    case ChainId.POLYGON:
-    case ChainId.POLYGON_MUMBAI:
-    case ChainId.ARBITRUM_ONE:
-    case ChainId.ARBITRUM_GOERLI:
-    case ChainId.AVALANCHE:
-    case ChainId.GOERLI:
-      return ProviderName.INFURA
-    case ChainId.CELO:
-    case ChainId.BNB:
-    case ChainId.BASE:
-      return ProviderName.QUIKNODE
-    case ChainId.CELO_ALFAJORES:
-      return ProviderName.FORNO
     default:
       return ProviderName.UNKNOWN
   }

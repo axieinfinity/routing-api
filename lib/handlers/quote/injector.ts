@@ -3,7 +3,6 @@ import {
   AlphaRouterConfig,
   ID_TO_CHAIN_ID,
   IRouter,
-  LegacyRoutingConfig,
   setGlobalLogger,
   setGlobalMetric,
   V3HeuristicGasModelFactory,
@@ -17,7 +16,7 @@ import { AWSMetricsLogger } from '../router-entities/aws-metrics-logger'
 import { StaticGasPriceProvider } from '../router-entities/static-gas-price-provider'
 import { QuoteQueryParams } from './schema/quote-schema'
 export class QuoteHandlerInjector extends InjectorSOR<
-  IRouter<AlphaRouterConfig | LegacyRoutingConfig>,
+  IRouter<AlphaRouterConfig>,
   QuoteQueryParams
 > {
   public async getRequestInjected(
@@ -28,7 +27,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
     context: Context,
     log: Logger,
     metricsLogger: MetricsLogger
-  ): Promise<RequestInjected<IRouter<AlphaRouterConfig | LegacyRoutingConfig>>> {
+  ): Promise<RequestInjected<IRouter<AlphaRouterConfig>>> {
     const { dependencies, activityId } = containerInjected
 
     const requestId = context.awsRequestId
@@ -119,7 +118,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
           v3PoolProvider,
           onChainQuoteProvider,
           gasPriceProvider,
-          v3GasModelFactory: new V3HeuristicGasModelFactory(provider),
+          v3GasModelFactory: new V3HeuristicGasModelFactory(),
           blockedTokenListProvider,
           tokenProvider,
           v2PoolProvider,

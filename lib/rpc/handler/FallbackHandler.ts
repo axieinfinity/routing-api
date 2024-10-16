@@ -4,10 +4,10 @@ import { getProviderId } from '../utils'
 import { ProviderHealthStateRepository } from '../ProviderHealthStateRepository'
 import { ProviderHealthStateDynamoDbRepository } from '../ProviderHealthStateDynamoDbRepository'
 import { ProviderHealthiness, ProviderHealthState } from '../ProviderHealthState'
-import { metric, MetricLoggerUnit, setGlobalMetric } from '@axieinfinity/smart-order-router'
 import { metricScope, MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyResult } from 'aws-lambda'
 import { AWSMetricsLogger } from '../../handlers/router-entities/aws-metrics-logger'
+import { metric, MetricLoggerUnit, setGlobalMetric } from '@axieinfinity/smart-order-router'
 
 export interface AlarmEvent {
   alarmName: string

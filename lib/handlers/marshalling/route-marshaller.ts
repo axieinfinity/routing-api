@@ -4,7 +4,6 @@ import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 import { MarshalledPair, PairMarshaller } from './pair-marshaller'
 import { MarshalledPool, PoolMarshaller } from './pool-marshaller'
 import { Pool } from '@uniswap/v3-sdk'
-
 export interface MarshalledV2Route {
   protocol: Protocol
   input: MarshalledToken

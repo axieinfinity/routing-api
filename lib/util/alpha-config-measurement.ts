@@ -1,5 +1,7 @@
-import { ChainId, Currency, CurrencyAmount } from '@axieinfinity/sdk-core'
+import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 import { Protocol } from '@uniswap/router-sdk'
+
 import { log, metric, MetricLoggerUnit, SwapRoute } from '@axieinfinity/smart-order-router'
 
 export const getDistribution = (distributionPercent: number) => {

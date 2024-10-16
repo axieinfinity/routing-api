@@ -1,10 +1,10 @@
-import { IOnChainQuoteProvider, log, metric, MetricLoggerUnit, MixedRoute, OnChainQuotes, V2Route, V3Route } from '@axieinfinity/smart-order-router'
-import { ChainId, Currency, CurrencyAmount } from '@axieinfinity/sdk-core'
+import {  Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../../util/quote-provider-traffic-switch-configuration'
 import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../../util/onChainQuoteProviderConfigs'
+import { ChainId } from '@axieinfinity/sdk-core'
+import { IOnChainQuoteProvider, V3Route, V2Route, OnChainQuotes, metric, MetricLoggerUnit, MixedRoute, log } from '@axieinfinity/smart-order-router'
 import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
-
 export type TrafficSwitchOnChainQuoteProviderProps = {
   currentQuoteProvider: IOnChainQuoteProvider
   targetQuoteProvider: IOnChainQuoteProvider

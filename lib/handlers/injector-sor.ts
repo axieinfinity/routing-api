@@ -1,4 +1,5 @@
-import { ChainId, Token } from '@axieinfinity/sdk-core'
+import { Token } from '@uniswap/sdk-core'
+import { ChainId, MIXED_ROUTE_QUOTER_V1_ADDRESSES, QUOTER_ADDRESSES, SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
 import {
   CachingGasStationProvider,
   CachingTokenListProvider,
@@ -18,12 +19,9 @@ import {
   IV3PoolProvider,
   IV3SubgraphProvider,
   LegacyGasPriceProvider,
-  MIXED_ROUTE_QUOTER_V1_ADDRESSES,
-  NEW_QUOTER_V2_ADDRESSES,
   NodeJSCache,
   OnChainGasPriceProvider,
   OnChainQuoteProvider,
-  QUOTER_V2_ADDRESSES,
   setGlobalLogger,
   StaticV2SubgraphProvider,
   StaticV3SubgraphProvider,
@@ -54,14 +52,7 @@ import { V2DynamoCache } from './pools/pool-caching/v2/v2-dynamo-cache'
 import { GlobalRpcProviders } from '../rpc/GlobalRpcProviders'
 import { StaticJsonRpcProvider } from '@ethersproject/providers'
 import { TrafficSwitchOnChainQuoteProvider } from './quote/provider-migration/v3/traffic-switch-on-chain-quote-provider'
-import {
-  BLOCK_NUMBER_CONFIGS,
-  GAS_ERROR_FAILURE_OVERRIDES,
-  NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS,
-  OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS,
-  RETRY_OPTIONS,
-  SUCCESS_RATE_FAILURE_OVERRIDES,
-} from '../util/onChainQuoteProviderConfigs'
+
 import { v4 } from 'uuid/index'
 import { chainProtocols } from '../cron/cache-config'
 import { Protocol } from '@uniswap/router-sdk'
@@ -69,24 +60,8 @@ import { UniJsonRpcProvider } from '../rpc/UniJsonRpcProvider'
 import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
-import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
+import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/module/providers/token-fee-fetcher'
 
-export const SUPPORTED_CHAINS: ChainId[] = [
-  ChainId.MAINNET,
-  ChainId.OPTIMISM,
-  ChainId.ARBITRUM_ONE,
-  ChainId.POLYGON,
-  ChainId.SEPOLIA,
-  ChainId.CELO,
-  ChainId.CELO_ALFAJORES,
-  ChainId.BNB,
-  ChainId.AVALANCHE,
-  ChainId.BASE,
-  ChainId.BLAST,
-  ChainId.ZORA,
-  ChainId.ZKSYNC,
-  ChainId.RONIN_TESTNET
-]
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
 export interface RequestInjected<Router> extends BaseRInj {
@@ -178,16 +153,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             }
           }
 
-          let timeout: number
-          switch (chainId) {
-            case ChainId.ARBITRUM_ONE:
-              timeout = 8000
-              break
-            default:
-              timeout = 5000
-              break
-          }
-
+          const timeout = 5000
+    
           let provider: StaticJsonRpcProvider
           if (GlobalRpcProviders.getGlobalUniRpcProviders(log).has(chainId)) {
             // Use RPC gateway.
@@ -311,67 +278,39 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           // Some providers like Infura set a gas limit per call of 10x block gas which is approx 150m
           // 200*725k < 150m
           let quoteProvider: IOnChainQuoteProvider | undefined = undefined
-          switch (chainId) {
-            case ChainId.SEPOLIA:
-            case ChainId.POLYGON_MUMBAI:
-            case ChainId.MAINNET:
-            case ChainId.POLYGON:
-            case ChainId.BASE:
-            case ChainId.ARBITRUM_ONE:
-            case ChainId.OPTIMISM:
-            case ChainId.BNB:
-            case ChainId.CELO:
-            case ChainId.AVALANCHE:
-            case ChainId.BLAST:
-            case ChainId.ZORA:
-            case ChainId.ZKSYNC:
-            case ChainId.RONIN_TESTNET:
-              const currentQuoteProvider = new OnChainQuoteProvider(
-                chainId,
-                provider,
-                multicall2Provider,
-                RETRY_OPTIONS[chainId],
-                (optimisticCachedRoutes, useMixedRouteQuoter) => {
-                  const protocol = useMixedRouteQuoter ? Protocol.MIXED : Protocol.V3
-                  return optimisticCachedRoutes
-                    ? OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS[protocol][chainId]
-                    : NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS[protocol][chainId]
-                },
-                GAS_ERROR_FAILURE_OVERRIDES[chainId],
-                SUCCESS_RATE_FAILURE_OVERRIDES[chainId],
-                BLOCK_NUMBER_CONFIGS[chainId],
-                // We will only enable shadow sample mixed quoter on Base
-                (useMixedRouteQuoter: boolean) =>
-                  useMixedRouteQuoter ? MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId] : QUOTER_V2_ADDRESSES[chainId]
-              )
-              const targetQuoteProvider = new OnChainQuoteProvider(
-                chainId,
-                provider,
-                multicall2Provider,
-                RETRY_OPTIONS[chainId],
-                (optimisticCachedRoutes, useMixedRouteQuoter) => {
-                  const protocol = useMixedRouteQuoter ? Protocol.MIXED : Protocol.V3
-                  return optimisticCachedRoutes
-                    ? OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS[protocol][chainId]
-                    : NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS[protocol][chainId]
-                },
-                GAS_ERROR_FAILURE_OVERRIDES[chainId],
-                SUCCESS_RATE_FAILURE_OVERRIDES[chainId],
-                BLOCK_NUMBER_CONFIGS[chainId],
-                (useMixedRouteQuoter: boolean) =>
-                  useMixedRouteQuoter ? MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId] : NEW_QUOTER_V2_ADDRESSES[chainId],
-                (chainId: ChainId, useMixedRouteQuoter: boolean, optimisticCachedRoutes: boolean) =>
-                  useMixedRouteQuoter
-                    ? `ChainId_${chainId}_ShadowMixedQuoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
-                    : `ChainId_${chainId}_ShadowV3Quoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
-              )
-              quoteProvider = new TrafficSwitchOnChainQuoteProvider({
-                currentQuoteProvider: currentQuoteProvider,
-                targetQuoteProvider: targetQuoteProvider,
-                chainId: chainId,
-              })
-              break
-          }
+          const currentQuoteProvider = new OnChainQuoteProvider(
+            {
+              chainId,
+              provider,
+              multicall2Provider,
+              quoterAddressOverride(useMixedRouteQuoter) {
+                return  useMixedRouteQuoter ? MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId] : QUOTER_ADDRESSES[chainId]
+              }
+            }
+          )
+          const targetQuoteProvider = new OnChainQuoteProvider(
+            {
+              chainId,
+              provider,
+              multicall2Provider,
+              quoterAddressOverride(useMixedRouteQuoter) {
+                  return useMixedRouteQuoter ? MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId] : QUOTER_ADDRESSES[chainId]
+              },
+              metricsPrefix(chainId, useMixedRouteQuoter, optimisticCachedRoutes) {
+                return  useMixedRouteQuoter
+                ? `ChainId_${chainId}_ShadowMixedQuoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
+                : `ChainId_${chainId}_ShadowV3Quoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
+              },
+            }
+          
+              
+            
+          )
+          quoteProvider = new TrafficSwitchOnChainQuoteProvider({
+            currentQuoteProvider: currentQuoteProvider,
+            targetQuoteProvider: targetQuoteProvider,
+            chainId: chainId,
+          })
 
           let routeCachingProvider: IRouteCachingProvider | undefined = undefined
           if (CACHED_ROUTES_TABLE_NAME && CACHED_ROUTES_TABLE_NAME !== '') {
@@ -383,19 +322,12 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           }
 
           const v2Supported = [
-            ChainId.MAINNET,
-            ChainId.ARBITRUM_ONE,
-            ChainId.OPTIMISM,
-            ChainId.POLYGON,
-            ChainId.BASE,
-            ChainId.BNB,
-            ChainId.AVALANCHE,
-            ChainId.BLAST,
-            ChainId.RONIN_TESTNET
+            ChainId.mainnet,
+            ChainId.testnet
           ]
 
           return {
-            chainId,
+            chainId,  
             dependencies: {
               provider,
               tokenListProvider,

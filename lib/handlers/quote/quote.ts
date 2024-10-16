@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi'
 import { Protocol } from '@uniswap/router-sdk'
-import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@axieinfinity/sdk-core'
+import { Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
 import {
   AlphaRouterConfig,
   ID_TO_NETWORK_NAME,
@@ -34,8 +34,8 @@ import { CurrencyLookup } from '../CurrencyLookup'
 import { SwapOptionsFactory } from './SwapOptionsFactory'
 import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
 import semver from 'semver'
-import { BigNumber } from '@ethersproject/bignumber'
-import { ZKSYNC_UPPER_SWAP_GAS_LIMIT } from '../../util/gasLimit'
+import { ChainId } from '@axieinfinity/sdk-core'
+import { Pair } from '@uniswap/v2-sdk'
 
 export class QuoteHandler extends APIGLambdaHandler<
   ContainerInjected,
@@ -444,9 +444,9 @@ export class QuoteHandler extends APIGLambdaHandler<
       quoteGasAdjusted,
       quoteGasAndPortionAdjusted,
       route,
-      estimatedGasUsed: preProcessedEstimatedGasUsed,
+      estimatedGasUsed,
       estimatedGasUsedQuoteToken,
-      estimatedGasUsedUSD: preProcessedEstimatedGasUsedUSD,
+      estimatedGasUsedUSD,
       estimatedGasUsedGasToken,
       gasPriceWei,
       methodParameters,
@@ -455,15 +455,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       hitsCachedRoute,
       portionAmount: outputPortionAmount, // TODO: name it back to portionAmount
     } = swapRoute
-
-    const estimatedGasUsed = this.adhocCorrectGasUsed(preProcessedEstimatedGasUsed, chainId, isMobileRequest)
-    const estimatedGasUsedUSD = this.adhocCorrectGasUsedUSD(
-      preProcessedEstimatedGasUsed,
-      preProcessedEstimatedGasUsedUSD,
-      chainId,
-      isMobileRequest
-    )
-
+ 
     if (simulationStatus == SimulationStatus.Failed) {
       metric.putMetric('SimulationFailed', 1, MetricLoggerUnit.Count)
     } else if (simulationStatus == SimulationStatus.Succeeded) {
@@ -522,8 +514,8 @@ export class QuoteHandler extends APIGLambdaHandler<
             amountOut: edgeAmountOut,
           })
         } else {
-          const reserve0 = nextPool.reserve0
-          const reserve1 = nextPool.reserve1
+          const reserve0 = (nextPool as Pair).reserve0
+          const reserve1 = (nextPool as Pair).reserve1
 
           curRoute.push({
             type: 'v2-pool',
@@ -666,7 +658,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       for (const protocolStr of requestedProtocols) {
         switch (protocolStr.toUpperCase()) {
           case Protocol.V2:
-            if (chainId === ChainId.MAINNET || !excludeV2) {
+            if (chainId === ChainId.mainnet || !excludeV2) {
               protocols.push(Protocol.V2)
             }
             break
@@ -674,7 +666,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             protocols.push(Protocol.V3)
             break
           case Protocol.MIXED:
-            if (chainId === ChainId.MAINNET || !excludeV2) {
+            if (chainId === ChainId.mainnet || !excludeV2) {
               protocols.push(Protocol.MIXED)
             }
             break
@@ -797,53 +789,6 @@ export class QuoteHandler extends APIGLambdaHandler<
         },
         `Tracked Route for pair [${tradingPair}/${tradeType.toUpperCase()}] on chain [${chainId}] with route hash [${routeStringHash}] for amount [${amount.toExact()}]`
       )
-    }
-  }
-
-  private adhocCorrectGasUsed(estimatedGasUsed: BigNumber, chainId: ChainId, isMobileRequest: boolean): BigNumber {
-    if (!isMobileRequest) {
-      return estimatedGasUsed
-    }
-
-    switch (chainId) {
-      case ChainId.ZKSYNC:
-        if (estimatedGasUsed.gt(ZKSYNC_UPPER_SWAP_GAS_LIMIT)) {
-          // this is a check to ensure that we don't return the gas used smaller than upper swap gas limit,
-          // although this is unlikely
-          return estimatedGasUsed
-        }
-
-        return ZKSYNC_UPPER_SWAP_GAS_LIMIT
-      default:
-        return estimatedGasUsed
-    }
-  }
-
-  private adhocCorrectGasUsedUSD(
-    estimatedGasUsed: BigNumber,
-    estimatedGasUsedUSD: CurrencyAmount<Currency>,
-    chainId: ChainId,
-    isMobileRequest: boolean
-  ): CurrencyAmount<Currency> {
-    if (!isMobileRequest) {
-      return estimatedGasUsedUSD
-    }
-
-    switch (chainId) {
-      case ChainId.ZKSYNC:
-        if (estimatedGasUsed.gt(ZKSYNC_UPPER_SWAP_GAS_LIMIT)) {
-          // this is a check to ensure that we don't return the gas used smaller than upper swap gas limit,
-          // although this is unlikely
-          return estimatedGasUsedUSD
-        }
-
-        const correctedEstimateGasUsedUSD = JSBI.divide(
-          JSBI.multiply(estimatedGasUsedUSD.quotient, JSBI.BigInt(ZKSYNC_UPPER_SWAP_GAS_LIMIT)),
-          JSBI.BigInt(estimatedGasUsed)
-        )
-        return CurrencyAmount.fromRawAmount(estimatedGasUsedUSD.currency, correctedEstimateGasUsedUSD)
-      default:
-        return estimatedGasUsedUSD
     }
   }
 

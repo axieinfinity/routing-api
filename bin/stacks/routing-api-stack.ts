@@ -1,4 +1,3 @@
-import { SUPPORTED_CHAINS } from '@axieinfinity/smart-order-router'
 import * as cdk from 'aws-cdk-lib'
 import { CfnOutput, Duration } from 'aws-cdk-lib'
 import * as aws_apigateway from 'aws-cdk-lib/aws-apigateway'
@@ -19,7 +18,7 @@ import { RpcGatewayDashboardStack } from './rpc-gateway-dashboard'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
 import { RpcGatewayFallbackStack } from './rpc-gateway-fallback-stack'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId, SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
 
 export const CHAINS_NOT_MONITORED: ChainId[] = TESTNETS
 export const REQUEST_SOURCES_NOT_MONITORED = ['unknown']

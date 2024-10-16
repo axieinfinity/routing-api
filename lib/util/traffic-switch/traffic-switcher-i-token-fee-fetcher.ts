@@ -1,5 +1,5 @@
+import { log} from '@axieinfinity/smart-order-router'
 import { TrafficSwitcher } from './traffic-switcher'
-import { log } from '@axieinfinity/smart-order-router'
 import { BigNumber } from 'ethers'
 import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
 import { ITokenFeeFetcher, TokenFeeMap } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
