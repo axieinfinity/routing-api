@@ -10,9 +10,11 @@ import dotenv from 'dotenv'
 import 'source-map-support/register'
 import { STAGE } from '../lib/util/stage'
 import { RoutingAPIStack } from './stacks/routing-api-stack'
-import { SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 dotenv.config()
+
+export const SUPPORTED_CHAINS = [ChainId.testnet] as const
 
 export class RoutingAPIStage extends Stage {
   public readonly url: CfnOutput
@@ -294,9 +296,6 @@ export class RoutingAPIPipeline extends Stack {
 const app = new cdk.App()
 
 const jsonRpcProviders = {
-  WEB3_RPC_1: process.env.WEB3_RPC_1!,
-  WEB3_RPC_11155111: process.env.WEB3_RPC_11155111!,
-  WEB3_RPC_2020: process.env.WEB3_RPC_2020!,
   WEB3_RPC_2021: process.env.WEB3_RPC_2021!,
 }
 

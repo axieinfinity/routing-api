@@ -1,5 +1,5 @@
 import BaseJoi from '@hapi/joi'
-import { SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
+import { SUPPORTED_CHAINS } from '../../../../bin/app'
 const Joi = BaseJoi.extend((joi) => ({
   base: joi.array(),
   type: 'stringArray',

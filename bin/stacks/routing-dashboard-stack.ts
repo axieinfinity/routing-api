@@ -8,7 +8,8 @@ import { RpcProvidersWidgetsFactory } from '../../lib/dashboards/rpc-providers-w
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
 import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
-import { ChainId, SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
+import { ChainId } from '@axieinfinity/sdk-core'
+import { SUPPORTED_CHAINS } from '../app'
 
 export const NAMESPACE = 'Uniswap'
 
@@ -35,7 +36,8 @@ export class RoutingDashboardStack extends cdk.NestedStack {
     const { apiName, routingLambdaName, poolCacheLambdaNameArray, ipfsPoolCacheLambdaName } = props
     const region = cdk.Stack.of(this).region
 
-    const MAINNETS = SUPPORTED_CHAINS.filter((chain) => !TESTNETS.includes(chain))
+    // const MAINNETS = SUPPORTED_CHAINS.filter((chain) => !TESTNETS.includes(chain))
+    const MAINNETS = [] as ChainId[]
 
     // No CDK resource exists for contributor insights at the moment so use raw CloudFormation.
     const REQUESTED_QUOTES_RULE_NAME = 'RequestedQuotes'
