@@ -13,7 +13,6 @@ import * as aws_lambda_nodejs from 'aws-cdk-lib/aws-lambda-nodejs'
 import * as aws_s3 from 'aws-cdk-lib/aws-s3'
 import * as aws_sns from 'aws-cdk-lib/aws-sns'
 import { Construct } from 'constructs'
-import * as path from 'path'
 import { chainProtocols } from '../../lib/cron/cache-config'
 import { STAGE } from '../../lib/util/stage'
 import { PoolCachingFilePrefixes } from '../../lib/util/poolCachingFilePrefixes'
@@ -117,7 +116,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
         {
           role: lambdaRole,
           runtime: aws_lambda.Runtime.NODEJS_18_X,
-          entry: path.join(__dirname, '../../lib/cron/cache-pools.ts'),
+          entry: 'lib/cron/cache-pools.ts',
           depsLockFilePath: 'package-lock.json',
           handler: 'handler',
           timeout: Duration.seconds(900),
@@ -191,7 +190,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
       this.ipfsPoolCachingLambda = new aws_lambda_nodejs.NodejsFunction(this, 'IpfsPoolCacheLambda', {
         role: lambdaRole,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: path.join(__dirname, '../../lib/cron/cache-pools-ipfs.ts'),
+        entry: 'lib/cron/cache-pools-ipfs.ts',
         depsLockFilePath: 'package-lock.json',
         handler: 'handler',
         timeout: Duration.seconds(900),
@@ -227,7 +226,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
       this.ipfsCleanPoolCachingLambda = new aws_lambda_nodejs.NodejsFunction(this, 'CleanIpfsPoolCacheLambda', {
         role: lambdaRole,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: path.join(__dirname, '../../lib/cron/clean-pools-ipfs.ts'),
+        entry: 'lib/cron/clean-pools-ipfs.ts',
         depsLockFilePath: 'package-lock.json',
         handler: 'handler',
         timeout: Duration.seconds(900),
@@ -279,7 +278,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
     const tokenListCachingLambda = new aws_lambda_nodejs.NodejsFunction(this, 'TokenListCacheLambda', {
       role: lambdaRole,
       runtime: aws_lambda.Runtime.NODEJS_18_X,
-      entry: path.join(__dirname, '../../lib/cron/cache-token-lists.ts'),
+      entry: 'lib/cron/cache-token-lists.ts',
       depsLockFilePath: 'package-lock.json',
       handler: 'handler',
       timeout: Duration.seconds(180),

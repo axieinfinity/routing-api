@@ -10,7 +10,6 @@ import * as aws_lambda_nodejs from 'aws-cdk-lib/aws-lambda-nodejs'
 import * as aws_s3 from 'aws-cdk-lib/aws-s3'
 import * as aws_sns from 'aws-cdk-lib/aws-sns'
 import { Construct } from 'constructs'
-import * as path from 'path'
 import { DynamoDBTableProps } from './routing-database-stack'
 import { RetentionDays } from 'aws-cdk-lib/aws-logs'
 
@@ -105,7 +104,7 @@ export class RoutingLambdaStack extends cdk.NestedStack {
     this.routingLambda = new aws_lambda_nodejs.NodejsFunction(this, 'RoutingLambda2', {
       role: lambdaRole,
       runtime: aws_lambda.Runtime.NODEJS_18_X,
-      entry: path.join(__dirname, '../../lib/handlers/index.ts'),
+      entry: 'lib/handlers/index.ts',
       depsLockFilePath: 'package-lock.json',
       handler: 'quoteHandler',
       // 11/8/23: URA currently calls the Routing API with a timeout of 10 seconds.

@@ -1,7 +1,6 @@
 import * as cdk from 'aws-cdk-lib'
 import { aws_cloudwatch, aws_cloudwatch_actions, aws_iam, aws_lambda, aws_lambda_nodejs } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
-import path from 'path'
 import { getRpcGatewayEnabledChains } from '../../lib/rpc/ProdConfig'
 import { ComparisonOperator, MathExpression } from 'aws-cdk-lib/aws-cloudwatch'
 import { RetentionDays } from 'aws-cdk-lib/aws-logs'
@@ -34,7 +33,7 @@ export class RpcGatewayFallbackStack extends cdk.NestedStack {
     const providerFallbackLambda = new aws_lambda_nodejs.NodejsFunction(this, 'ProviderFallbackLambda', {
       role: lambdaRole,
       runtime: aws_lambda.Runtime.NODEJS_18_X,
-      entry: path.join(__dirname, '../../lib/rpc/handler/index.ts'),
+      entry: 'lib/rpc/handler/index.ts',
       depsLockFilePath: 'package-lock.json',
       handler: 'fallbackHandler',
       timeout: cdk.Duration.seconds(15),
