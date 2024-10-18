@@ -3,11 +3,9 @@ import { TradeType } from '@uniswap/sdk-core'
 import { Protocol } from '@uniswap/router-sdk'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 import { CachedRouteMarshaller, MarshalledCachedRoute } from './cached-route-marshaller'
-import { ChainId } from '../../../bin/app'
-
 export interface MarshalledCachedRoutes {
   routes: MarshalledCachedRoute[]
-  chainId: ChainId
+  chainId: number
   tokenIn: MarshalledToken
   tokenOut: MarshalledToken
   protocolsCovered: Protocol[]

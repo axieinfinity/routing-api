@@ -177,11 +177,11 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
 
           const tokenCache = new NodeJSCache<Token>(new NodeCache({ stdTTL: 3600, useClones: false }))
           const blockedTokenCache = new NodeJSCache<Token>(new NodeCache({ stdTTL: 3600, useClones: false }))
-          const multicall2Provider = new UniswapMulticallProvider(chainId, provider, 375_000)
+          const multicall2Provider = new UniswapMulticallProvider(2021, provider, 375_000)
 
-          const noCacheV3PoolProvider = new V3PoolProvider(chainId, multicall2Provider)
+          const noCacheV3PoolProvider = new V3PoolProvider(2021, multicall2Provider)
           const inMemoryCachingV3PoolProvider = new CachingV3PoolProvider(
-            chainId,
+            2021,
             noCacheV3PoolProvider,
             new NodeJSCache(new NodeCache({ stdTTL: 180, useClones: false }))
           )
@@ -197,7 +197,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             sourceOfTruthPoolProvider: noCacheV3PoolProvider,
           })
 
-          const onChainTokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider)
+          const onChainTokenFeeFetcher = new OnChainTokenFeeFetcher(2021, provider)
           const graphQLTokenFeeFetcher = new GraphQLTokenFeeFetcher(
             new UniGraphQLProvider(),
             onChainTokenFeeFetcher,
@@ -215,18 +215,18 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           })
 
           const tokenValidatorProvider = new TokenValidatorProvider(
-            chainId,
+            2021,
             multicall2Provider,
             new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false }))
           )
           const tokenPropertiesProvider = new TokenPropertiesProvider(
-            chainId,
+            2021,
             new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false })),
             trafficSwitcherTokenFetcher
           )
-          const underlyingV2PoolProvider = new V2PoolProvider(chainId, multicall2Provider, tokenPropertiesProvider)
+          const underlyingV2PoolProvider = new V2PoolProvider(2021, multicall2Provider, tokenPropertiesProvider)
           const v2PoolProvider = new CachingV2PoolProvider(
-            chainId,
+            2021,
             underlyingV2PoolProvider,
             new V2DynamoCache(V2_PAIRS_CACHE_TABLE_NAME!)
           )
@@ -248,7 +248,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
                   return await V3AWSSubgraphProvider.EagerBuild(POOL_CACHE_BUCKET_3!, POOL_CACHE_GZIP_KEY!, chainId)
                 } catch (err) {
                   log.error({ err }, 'AWS Subgraph Provider unavailable, defaulting to Static Subgraph Provider')
-                  return new StaticV3SubgraphProvider(chainId, v3PoolProvider)
+                  return new StaticV3SubgraphProvider(2021, v3PoolProvider)
                 }
               })(),
               (async () => {
@@ -263,48 +263,51 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
 
                   return await V2AWSSubgraphProvider.EagerBuild(POOL_CACHE_BUCKET_3!, POOL_CACHE_GZIP_KEY!, chainId)
                 } catch (err) {
-                  return new StaticV2SubgraphProvider(chainId)
+                  return new StaticV2SubgraphProvider(2021)
                 }
               })(),
             ])
 
           const tokenProvider = new CachingTokenProviderWithFallback(
-            chainId,
+            2021,
             tokenCache,
             tokenListProvider,
-            new TokenProvider(chainId, multicall2Provider)
+            new TokenProvider(2021, multicall2Provider)
           )
 
           // Some providers like Infura set a gas limit per call of 10x block gas which is approx 150m
           // 200*725k < 150m
           let quoteProvider: IOnChainQuoteProvider | undefined = undefined
           const currentQuoteProvider = new OnChainQuoteProvider(
-            {
-              chainId,
+              2021,
               provider,
               multicall2Provider,
-              quoterAddressOverride(useMixedRouteQuoter) {
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              (useMixedRouteQuoter) => {
                 return  useMixedRouteQuoter ? "0x9FC1eaBd6C8fCFbd2c43c3641DC612Ffa61fcACd" : "0xB2Cc117Ed42cBE07710C90903bE46D2822bcde45"
               }
-            }
           )
           const targetQuoteProvider = new OnChainQuoteProvider(
-            {
-              chainId,
+              2021,
               provider,
               multicall2Provider,
-              quoterAddressOverride(useMixedRouteQuoter) {
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              (useMixedRouteQuoter) => {
                   return useMixedRouteQuoter ? "0x9FC1eaBd6C8fCFbd2c43c3641DC612Ffa61fcACd" : "0xB2Cc117Ed42cBE07710C90903bE46D2822bcde45"
               },
-              metricsPrefix(chainId, useMixedRouteQuoter, optimisticCachedRoutes) {
+              (chainId, useMixedRouteQuoter, optimisticCachedRoutes) => {
                 return  useMixedRouteQuoter
                 ? `ChainId_${chainId}_ShadowMixedQuoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
                 : `ChainId_${chainId}_ShadowV3Quoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
-              },
-            }
-          
-              
-            
+              },         
           )
           quoteProvider = new TrafficSwitchOnChainQuoteProvider({
             currentQuoteProvider: currentQuoteProvider,
@@ -336,9 +339,9 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               tokenProvider,
               tokenProviderFromTokenList: tokenListProvider,
               gasPriceProvider: new CachingGasStationProvider(
-                chainId,
+                2021,
                 new OnChainGasPriceProvider(
-                  chainId,
+                  2021,
                   new EIP1559GasPriceProvider(provider),
                   new LegacyGasPriceProvider(provider)
                 ),
