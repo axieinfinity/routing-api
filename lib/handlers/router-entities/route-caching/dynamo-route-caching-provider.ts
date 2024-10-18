@@ -87,8 +87,8 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
    * @param _
    * @protected
    */
-  protected async _getBlocksToLive(): Promise<number> {
-    return this.DEFAULT_BLOCKS_TO_LIVE_ROUTES_DB(2021)
+  protected async _getBlocksToLive(cachedRoutes: CachedRoutes, _: CurrencyAmount<Currency>): Promise<number> {
+    return this.DEFAULT_BLOCKS_TO_LIVE_ROUTES_DB(cachedRoutes.chainId)
   }
 
   /**
@@ -103,7 +103,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
    * @protected
    */
   protected async _getCachedRoute(
-    chainId: number,
+    chainId: ChainId,
     amount: CurrencyAmount<Currency>,
     quoteToken: Token,
     tradeType: TradeType,
@@ -422,7 +422,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
    * @param _protocols
    */
   public async getCacheMode(
-    _chainId: number,
+    _chainId: ChainId,
     _amount: CurrencyAmount<Currency>,
     _quoteToken: Token,
     _tradeType: TradeType,

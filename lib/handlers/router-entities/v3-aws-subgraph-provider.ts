@@ -12,7 +12,7 @@ export class V3AWSSubgraphProviderWithFallback extends V3SubgraphProvider implem
 
   constructor(private chain: ChainId, private bucket: string, key: string) {
     //NOTE: Fixing the type of chain to ChainId
-    super(2021)
+    super(chain as ChainId)
     this.key = `${key}${`-${chain}`}`
   }
 

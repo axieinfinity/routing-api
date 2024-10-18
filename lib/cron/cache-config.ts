@@ -22,7 +22,7 @@ export const chainProtocols = [
     protocol: Protocol.V3,
     chainId: ChainId.testnet,
     timeout: 90000,
-    provider: new V3SubgraphProvider(2021, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
+    provider: new V3SubgraphProvider(ChainId.testnet, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
   },
 
   // V2.
@@ -46,7 +46,7 @@ export const chainProtocols = [
     chainId: ChainId.testnet,
     timeout: 840000,
     provider: new V2SubgraphProvider(
-      2021,
+      ChainId.testnet,
       5,
       900000,
       true,

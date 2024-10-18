@@ -1,6 +1,7 @@
 import {
   AlphaRouter,
   AlphaRouterConfig,
+  ID_TO_CHAIN_ID,
   IRouter,
   setGlobalLogger,
   setGlobalMetric,
@@ -73,7 +74,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
 
     // Today API is restricted such that both tokens must be on the same chain.
     const chainId = tokenInChainId
-    const chainIdEnum = 2021
+    const chainIdEnum = ID_TO_CHAIN_ID(chainId)
 
     if (!dependencies[chainIdEnum]) {
       // Request validation should prevent reject unsupported chains with 4xx already, so this should not be possible.
@@ -95,6 +96,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
       v2SubgraphProvider,
       gasPriceProvider: gasPriceProviderOnChain,
       routeCachingProvider,
+      v2Supported,
     } = dependencies[chainIdEnum]!
 
     let onChainQuoteProvider = dependencies[chainIdEnum]!.onChainQuoteProvider
@@ -116,7 +118,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
           v3PoolProvider,
           onChainQuoteProvider,
           gasPriceProvider,
-          v3GasModelFactory: new V3HeuristicGasModelFactory(provider),
+          v3GasModelFactory: new V3HeuristicGasModelFactory(),
           blockedTokenListProvider,
           tokenProvider,
           v2PoolProvider,
@@ -125,7 +127,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
           routeCachingProvider,
           tokenValidatorProvider,
           tokenPropertiesProvider,
-          v2Supported: [2021],
+          v2Supported,
         })
         break
     }
