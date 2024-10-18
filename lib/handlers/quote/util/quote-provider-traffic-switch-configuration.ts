@@ -11,13 +11,6 @@ export const QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION = (
   chainId: ChainId
 ): QuoteProviderTrafficSwitchConfiguration => {
   switch (chainId) {
-    case ChainId.mainnet:
-      return {
-        switchExactInPercentage: 100,
-        samplingExactInPercentage: 0,
-        switchExactOutPercentage: 100,
-        samplingExactOutPercentage: 0,
-      } as QuoteProviderTrafficSwitchConfiguration
     case ChainId.testnet:
       return {
         switchExactInPercentage: 100,

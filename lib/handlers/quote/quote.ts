@@ -249,7 +249,6 @@ export class QuoteHandler extends APIGLambdaHandler<
     const requestSource = requestSourceHeader ?? params.requestQueryParams.source ?? ''
     const isMobileRequest = ['uniswap-ios', 'uniswap-android'].includes(requestSource)
     const protocols = QuoteHandler.protocolsFromRequest(
-      chainId,
       protocolsStr,
       isMobileRequest,
       appVersion,
@@ -641,7 +640,6 @@ export class QuoteHandler extends APIGLambdaHandler<
   }
 
   static protocolsFromRequest(
-    chainId: ChainId,
     requestedProtocols: string[] | string | undefined,
     isMobileRequest: boolean,
     appVersion: string | undefined,
@@ -658,7 +656,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       for (const protocolStr of requestedProtocols) {
         switch (protocolStr.toUpperCase()) {
           case Protocol.V2:
-            if (chainId === ChainId.mainnet || !excludeV2) {
+            if (!excludeV2) {
               protocols.push(Protocol.V2)
             }
             break
@@ -666,7 +664,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             protocols.push(Protocol.V3)
             break
           case Protocol.MIXED:
-            if (chainId === ChainId.mainnet || !excludeV2) {
+            if (!excludeV2) {
               protocols.push(Protocol.MIXED)
             }
             break
