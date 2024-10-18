@@ -10,9 +10,13 @@ import dotenv from 'dotenv'
 import 'source-map-support/register'
 import { STAGE } from '../lib/util/stage'
 import { RoutingAPIStack } from './stacks/routing-api-stack'
-import { ChainId } from '@axieinfinity/sdk-core'
 
 dotenv.config()
+
+export enum ChainId {
+  mainnet = 2020,
+  testnet = 2021
+}
 
 export const SUPPORTED_CHAINS = [ChainId.testnet] as const
 

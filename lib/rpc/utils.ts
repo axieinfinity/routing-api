@@ -1,4 +1,4 @@
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from "../../bin/app"
 
 export function chainIdToNetworkName(networkId: ChainId): string {
   switch (networkId) {

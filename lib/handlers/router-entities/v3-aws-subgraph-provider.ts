@@ -1,8 +1,8 @@
 import { IV3SubgraphProvider, log, V3SubgraphPool, V3SubgraphProvider } from '@axieinfinity/smart-order-router'
 import { S3 } from 'aws-sdk'
-import { ChainId } from '@axieinfinity/sdk-core'
 import _ from 'lodash'
 import NodeCache from 'node-cache'
+import { ChainId } from '../../../bin/app'
 
 const POOL_CACHE = new NodeCache({ stdTTL: 240, useClones: false })
 const POOL_CACHE_KEY = (chainId: ChainId) => `pools${chainId}`

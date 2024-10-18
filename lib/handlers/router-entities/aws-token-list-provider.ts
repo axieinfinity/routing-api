@@ -1,4 +1,3 @@
-import { ChainId } from '@axieinfinity/sdk-core'
 import {
   CachingTokenListProvider,
   ITokenListProvider,
@@ -9,6 +8,7 @@ import {
 import { TokenList } from '@uniswap/token-lists'
 import S3 from 'aws-sdk/clients/s3'
 import NodeCache from 'node-cache'
+import { ChainId } from '../../../bin/app'
 
 const TOKEN_LIST_CACHE = new NodeCache({ stdTTL: 600, useClones: false })
 

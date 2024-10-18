@@ -1,7 +1,7 @@
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
 import { CachedRoutesBucket } from './cached-routes-bucket'
 import { CacheMode } from '@axieinfinity/smart-order-router'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '../../../../../bin/app'
 
 interface CachedRoutesStrategyArgs {
   pair: string

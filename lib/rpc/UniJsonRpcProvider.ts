@@ -1,7 +1,6 @@
 import { CallType, MAJOR_METHOD_NAMES, SingleJsonRpcProvider } from './SingleJsonRpcProvider'
 import { StaticJsonRpcProvider, TransactionRequest } from '@ethersproject/providers'
 import { isEmpty } from 'lodash'
-import { ChainId } from '@axieinfinity/sdk-core'
 import {
   BlockTag,
   BlockWithTransactions,
@@ -15,6 +14,7 @@ import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { Deferrable } from '@ethersproject/properties'
 import Logger from 'bunyan'
 import { UniJsonRpcProviderConfig } from './config'
+import { ChainId } from '../../bin/app'
 
 export class UniJsonRpcProvider extends StaticJsonRpcProvider {
   readonly chainId: ChainId
