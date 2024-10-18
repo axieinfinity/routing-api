@@ -115,7 +115,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
         `PoolCacheLambda-ChainId${chainId}-Protocol${protocol}`,
         {
           role: lambdaRole,
-          runtime: aws_lambda.Runtime.NODEJS_18_X,
+          runtime: aws_lambda.Runtime.NODEJS_20_X,
           entry: 'lib/cron/cache-pools.ts',
           depsLockFilePath: 'package-lock.json',
           handler: 'handler',
@@ -189,7 +189,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
     if (stage == STAGE.BETA || stage == STAGE.PROD) {
       this.ipfsPoolCachingLambda = new aws_lambda_nodejs.NodejsFunction(this, 'IpfsPoolCacheLambda', {
         role: lambdaRole,
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        runtime: aws_lambda.Runtime.NODEJS_20_X,
         entry: 'lib/cron/cache-pools-ipfs.ts',
         depsLockFilePath: 'package-lock.json',
         handler: 'handler',
@@ -225,7 +225,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
 
       this.ipfsCleanPoolCachingLambda = new aws_lambda_nodejs.NodejsFunction(this, 'CleanIpfsPoolCacheLambda', {
         role: lambdaRole,
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        runtime: aws_lambda.Runtime.NODEJS_20_X,
         entry: 'lib/cron/clean-pools-ipfs.ts',
         depsLockFilePath: 'package-lock.json',
         handler: 'handler',
@@ -277,7 +277,7 @@ export class RoutingCachingStack extends cdk.NestedStack {
 
     const tokenListCachingLambda = new aws_lambda_nodejs.NodejsFunction(this, 'TokenListCacheLambda', {
       role: lambdaRole,
-      runtime: aws_lambda.Runtime.NODEJS_18_X,
+      runtime: aws_lambda.Runtime.NODEJS_20_X,
       entry: 'lib/cron/cache-token-lists.ts',
       depsLockFilePath: 'package-lock.json',
       handler: 'handler',
