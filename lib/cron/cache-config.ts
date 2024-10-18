@@ -22,7 +22,7 @@ export const chainProtocols = [
     protocol: Protocol.V3,
     chainId: ChainId.testnet,
     timeout: 90000,
-    provider: new V3SubgraphProvider(2021, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
+    provider: new V3SubgraphProvider(2021, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold, "https://saigon-thegraph.roninchain.com/subgraphs/name/axieinfinity/katana-v3"),
   },
 
   // V2.
@@ -52,7 +52,8 @@ export const chainProtocols = [
       true,
       1000,
       v2TrackedEthThreshold,
-      v2UntrackedUsdThreshold
+      v2UntrackedUsdThreshold,
+      "https://saigon-thegraph.roninchain.com/subgraphs/name/axieinfinity/katana-subgraph-green"
     ), // 1000 is the largest page size supported by thegraph
   },
 ]
