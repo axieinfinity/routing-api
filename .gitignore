@@ -11,3 +11,4 @@ lib/types
 cache
 .idea
 .npmrc
+._*
