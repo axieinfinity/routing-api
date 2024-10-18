@@ -1,6 +1,6 @@
 import { Protocol } from '@uniswap/router-sdk'
 import { V2SubgraphProvider, V3SubgraphProvider } from '@axieinfinity/smart-order-router'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export const v3TrackedEthThreshold = 0.01 // Pools need at least 0.01 of trackedEth to be selected
 const v3UntrackedUsdThreshold = 25000 // Pools need at least 25K USD (untracked) to be selected (for metrics only)
@@ -22,7 +22,7 @@ export const chainProtocols = [
     protocol: Protocol.V3,
     chainId: ChainId.testnet,
     timeout: 90000,
-    provider: new V3SubgraphProvider(2021, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
+    provider: new V3SubgraphProvider(ChainId.testnet, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
   },
 
   // V2.
@@ -46,7 +46,7 @@ export const chainProtocols = [
     chainId: ChainId.testnet,
     timeout: 840000,
     provider: new V2SubgraphProvider(
-      2021,
+      ChainId.testnet,
       5,
       900000,
       true,

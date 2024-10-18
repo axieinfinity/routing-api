@@ -1,4 +1,5 @@
-import { ChainId } from '../../bin/app'
+import { ChainId } from '@axieinfinity/sdk-core'
+
 import { GraphQLClient, IGraphQLClient } from './graphql-client'
 import {
   GRAPHQL_QUERY_MULTIPLE_TOKEN_INFO_BY_CONTRACTS,

@@ -1,6 +1,6 @@
 import {  TradeType } from '@uniswap/sdk-core'
 import { CachedRoutes } from '@axieinfinity/smart-order-router'
-import { ChainId } from '../../../../../bin/app'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 interface PairTradeTypeChainIdArgs {
   tokenIn: string
@@ -34,7 +34,7 @@ export class PairTradeTypeChainId {
       tokenIn: cachedRoutes.tokenIn.address,
       tokenOut: cachedRoutes.tokenOut.address,
       tradeType: cachedRoutes.tradeType,
-      chainId: 2021,
+      chainId: cachedRoutes.chainId,
     })
   }
 }

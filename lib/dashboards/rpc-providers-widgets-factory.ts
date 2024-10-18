@@ -1,9 +1,9 @@
 import { WidgetsFactory } from './core/widgets-factory'
 import { Widget } from './core/model/widget'
+import { ChainId } from '@axieinfinity/sdk-core'
 import _ from 'lodash'
 import { ProviderName } from '../handlers/evm/provider/ProviderName'
 import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
-import { ChainId } from '../../bin/app'
 
 const ID_TO_PROVIDER = (id: ChainId): string => {
   switch (id) {

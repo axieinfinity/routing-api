@@ -1,68 +1,8 @@
-import { ITokenListProvider, ITokenProvider } from '@axieinfinity/smart-order-router'
+import { Currency, Token } from '@uniswap/sdk-core'
+import { ITokenListProvider, ITokenProvider, NATIVE_NAMES_BY_ID } from '@axieinfinity/smart-order-router'
 import Logger from 'bunyan'
 import { isAddress } from '../util/isAddress'
-
-import {
-  Ether,
-  NativeCurrency,
-  Currency,
-  Token,
-} from '@uniswap/sdk-core';
-import { ChainId } from '../../bin/app';
-
-export enum NativeCurrencyName {
-  RON = 'RON',
-}
-
-export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
-  [ChainId.testnet]: [
-    'RON',
-    'RON',
-    '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-  ],
-};
-
-export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
-  [ChainId.testnet]: NativeCurrencyName.RON,
-};
-
-export const WRAPPED_NATIVE_CURRENCY = {
-  [ChainId.testnet]: new Token(
-    1,
-    '0xa959726154953bae111746e265e6d754f48570e6',
-    18,
-    'WRON',
-    'Wrapped Ron'
-  ),
-};
-export class ExtendedEther extends Ether {
-  public get wrapped(): Token {
-    if (this.chainId in WRAPPED_NATIVE_CURRENCY) {
-      return WRAPPED_NATIVE_CURRENCY[2021];
-    }
-    throw new Error('Unsupported chain ID');
-  }
-
-  private static _cachedExtendedEther: { [chainId: number]: NativeCurrency } =
-    {};
-
-  public static onChain(chainId: number): ExtendedEther {
-    return (
-      this._cachedExtendedEther[chainId] ??
-      (this._cachedExtendedEther[chainId] = new ExtendedEther(chainId))
-    );
-  }
-}
-
-const cachedNativeCurrency: { [chainId: number]: NativeCurrency } = {};
-
-export function nativeOnChain(chainId: number): NativeCurrency {
-  if (cachedNativeCurrency[chainId] != undefined) {
-    return cachedNativeCurrency[chainId]!;
-  }
-    cachedNativeCurrency[chainId] = ExtendedEther.onChain(chainId);
-  return cachedNativeCurrency[chainId]!;
-}
+import { RON } from '@axieinfinity/sdk-core'
 
 /**
  * CurrencyLookup searches native tokens, token lists, and on chain to determine
@@ -95,7 +35,7 @@ export class CurrencyLookup {
       return undefined
     }
 
-    const nativeToken = nativeOnChain(chainId)
+    const nativeToken = RON.onChain(chainId)
     this.log.debug(
       {
         tokenAddress: nativeToken.wrapped.address,
