@@ -6,7 +6,7 @@ import {
 } from '@axieinfinity/smart-order-router'
 import { FeeOptions } from '@uniswap/v3-sdk'
 import { FlatFeeOptions } from '@uniswap/universal-router-sdk'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterConfig => {
   switch (chainId) {

@@ -1,10 +1,10 @@
 import { TradeType } from '@uniswap/sdk-core'
 import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
+import { ChainId } from '@axieinfinity/sdk-core'
 import _ from 'lodash'
 import { PAIRS_TO_TRACK } from '../handlers/quote/util/pairs-to-track'
 import { Widget } from './core/model/widget'
 import { WidgetsFactory } from './core/widgets-factory'
-import { ChainId } from '../../bin/app'
 
 export class QuoteAmountsWidgetsFactory implements WidgetsFactory {
   region: string

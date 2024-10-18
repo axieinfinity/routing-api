@@ -5,6 +5,7 @@ import {
 } from '@axieinfinity/smart-order-router'
 import { EventBridgeEvent, ScheduledHandler } from 'aws-lambda'
 import { S3 } from 'aws-sdk'
+import { ChainId } from '@axieinfinity/sdk-core'
 import { default as bunyan, default as Logger } from 'bunyan'
 import { S3_POOL_CACHE_KEY } from '../util/pool-cache-key'
 import {
@@ -14,7 +15,6 @@ import { AWSMetricsLogger } from '../handlers/router-entities/aws-metrics-logger
 import { metricScope } from 'aws-embedded-metrics'
 import * as zlib from 'zlib'
 import dotenv from 'dotenv'
-import { ChainId } from '../../bin/app'
 
 // Needed for local stack dev, not needed for staging or prod
 // But it still doesn't work on the local cdk stack update,

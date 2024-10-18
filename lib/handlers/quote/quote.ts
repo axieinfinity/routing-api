@@ -34,8 +34,8 @@ import { CurrencyLookup } from '../CurrencyLookup'
 import { SwapOptionsFactory } from './SwapOptionsFactory'
 import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
 import semver from 'semver'
+import { ChainId } from '@axieinfinity/sdk-core'
 import { Pair } from '@uniswap/v2-sdk'
-import { ChainId } from '../../../bin/app'
 
 export class QuoteHandler extends APIGLambdaHandler<
   ContainerInjected,

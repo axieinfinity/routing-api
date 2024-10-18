@@ -1,4 +1,5 @@
 import Logger from 'bunyan'
+import { ChainId } from '@axieinfinity/sdk-core'
 import { getProviderId } from '../utils'
 import { ProviderHealthStateRepository } from '../ProviderHealthStateRepository'
 import { ProviderHealthStateDynamoDbRepository } from '../ProviderHealthStateDynamoDbRepository'
@@ -7,7 +8,6 @@ import { metricScope, MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyResult } from 'aws-lambda'
 import { AWSMetricsLogger } from '../../handlers/router-entities/aws-metrics-logger'
 import { metric, MetricLoggerUnit, setGlobalMetric } from '@axieinfinity/smart-order-router'
-import { ChainId } from '../../../bin/app'
 
 export interface AlarmEvent {
   alarmName: string

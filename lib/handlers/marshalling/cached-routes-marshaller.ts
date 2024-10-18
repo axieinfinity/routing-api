@@ -3,7 +3,7 @@ import { TradeType } from '@uniswap/sdk-core'
 import { Protocol } from '@uniswap/router-sdk'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 import { CachedRouteMarshaller, MarshalledCachedRoute } from './cached-route-marshaller'
-import { ChainId } from '../../../bin/app'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export interface MarshalledCachedRoutes {
   routes: MarshalledCachedRoute[]

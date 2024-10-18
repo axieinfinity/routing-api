@@ -1,4 +1,5 @@
 import { Token } from '@uniswap/sdk-core'
+import { ChainId, MIXED_ROUTE_QUOTER_V1_ADDRESSES, QUOTER_ADDRESSES } from '@axieinfinity/sdk-core'
 import {
   CachingGasStationProvider,
   CachingTokenListProvider,
@@ -60,7 +61,7 @@ import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
 import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
-import { ChainId, SUPPORTED_CHAINS } from '../../bin/app'
+import { SUPPORTED_CHAINS } from '../../bin/app'
 
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
@@ -284,7 +285,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               provider,
               multicall2Provider,
               quoterAddressOverride(useMixedRouteQuoter) {
-                return  useMixedRouteQuoter ? "0x9FC1eaBd6C8fCFbd2c43c3641DC612Ffa61fcACd" : "0xB2Cc117Ed42cBE07710C90903bE46D2822bcde45"
+                return  useMixedRouteQuoter ? MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId] : QUOTER_ADDRESSES[chainId]
               }
             }
           )
@@ -294,7 +295,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               provider,
               multicall2Provider,
               quoterAddressOverride(useMixedRouteQuoter) {
-                  return useMixedRouteQuoter ? "0x9FC1eaBd6C8fCFbd2c43c3641DC612Ffa61fcACd" : "0xB2Cc117Ed42cBE07710C90903bE46D2822bcde45"
+                  return useMixedRouteQuoter ? MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId] : QUOTER_ADDRESSES[chainId]
               },
               metricsPrefix(chainId, useMixedRouteQuoter, optimisticCachedRoutes) {
                 return  useMixedRouteQuoter

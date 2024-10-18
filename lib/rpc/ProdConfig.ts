@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi'
 import PROD_CONFIG from '../config/rpcProviderProdConfig.json'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '@axieinfinity/sdk-core'
 
 export interface ChainConfig {
   chainId: number
