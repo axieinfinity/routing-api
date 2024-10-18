@@ -10,8 +10,7 @@ import {
 import { ProdConfig, ProdConfigJoi } from './ProdConfig'
 import { chainIdToNetworkName, generateProviderUrl } from './utils'
 import PROD_CONFIG from '../config/rpcProviderProdConfig.json'
-import { ChainId } from '../../bin/app'
-
+import { ChainId } from '../util/testNets'
 export class GlobalRpcProviders {
   private static SINGLE_RPC_PROVIDERS: Map<ChainId, SingleJsonRpcProvider[]> | null = null
 

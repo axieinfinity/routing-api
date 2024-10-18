@@ -8,7 +8,7 @@ import {
   Currency,
   Token,
 } from '@uniswap/sdk-core';
-import { ChainId } from '../../bin/app';
+import { ChainId } from '../util/testNets'
 
 export enum NativeCurrencyName {
   RON = 'RON',

@@ -13,7 +13,7 @@ import NodeCache from 'node-cache'
 import { S3_POOL_CACHE_KEY } from '../../util/pool-cache-key'
 import { PoolCachingFilePrefixes } from '../../util/poolCachingFilePrefixes'
 import * as zlib from 'zlib'
-import { ChainId } from '../../../bin/app'
+import { ChainId } from '../../util/testNets'
 
 const POOL_CACHE = new NodeCache({ stdTTL: 240, useClones: false })
 const LOCAL_POOL_CACHE_KEY = (chainId: ChainId, protocol: Protocol) => `pools${chainId}#${protocol}`

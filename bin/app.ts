@@ -10,15 +10,9 @@ import dotenv from 'dotenv'
 import 'source-map-support/register'
 import { STAGE } from '../lib/util/stage'
 import { RoutingAPIStack } from './stacks/routing-api-stack'
+import { SUPPORTED_CHAINS } from '../lib/util/testNets'
 
 dotenv.config()
-
-export enum ChainId {
-  mainnet = 2020,
-  testnet = 2021
-}
-
-export const SUPPORTED_CHAINS = [ChainId.testnet] as const
 
 export class RoutingAPIStage extends Stage {
   public readonly url: CfnOutput

@@ -14,7 +14,7 @@ import { AWSMetricsLogger } from '../handlers/router-entities/aws-metrics-logger
 import { metricScope } from 'aws-embedded-metrics'
 import * as zlib from 'zlib'
 import dotenv from 'dotenv'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '../util/testNets'
 
 // Needed for local stack dev, not needed for staging or prod
 // But it still doesn't work on the local cdk stack update,

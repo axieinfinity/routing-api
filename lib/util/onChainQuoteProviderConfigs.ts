@@ -1,4 +1,4 @@
-import { ChainId } from "../../bin/app"
+import { ChainId } from "./testNets"
 
 // block -1 means it's never deployed
 export const NEW_QUOTER_DEPLOY_BLOCK: { [chainId in ChainId]: number } = {

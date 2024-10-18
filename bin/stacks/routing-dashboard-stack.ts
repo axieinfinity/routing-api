@@ -6,9 +6,8 @@ import { QuoteAmountsWidgetsFactory } from '../../lib/dashboards/quote-amounts-w
 import { CachedRoutesWidgetsFactory } from '../../lib/dashboards/cached-routes-widgets-factory'
 import { RpcProvidersWidgetsFactory } from '../../lib/dashboards/rpc-providers-widgets-factory'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
-import { TESTNETS } from '../../lib/util/testNets'
+import { ChainId, SUPPORTED_CHAINS, TESTNETS } from '../../lib/util/testNets'
 import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
-import { ChainId, SUPPORTED_CHAINS } from '../app'
 
 export const NAMESPACE = 'Uniswap'
 

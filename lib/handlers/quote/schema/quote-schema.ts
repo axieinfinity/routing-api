@@ -1,5 +1,5 @@
 import BaseJoi from '@hapi/joi'
-import { SUPPORTED_CHAINS } from '../../../../bin/app'
+import { SUPPORTED_CHAINS } from '../../../util/testNets'
 const Joi = BaseJoi.extend((joi) => ({
   base: joi.array(),
   type: 'stringArray',

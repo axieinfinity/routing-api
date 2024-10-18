@@ -4,7 +4,7 @@ import { BigNumber } from 'ethers'
 import { log, metric, MetricLoggerUnit } from '@axieinfinity/smart-order-router'
 import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
 import { ITokenFeeFetcher, TokenFeeMap } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '../util/testNets'
 
 /* Implementation of the ITokenFeeFetcher interface to give access to Uniswap GraphQL API token fee data.
  * This fetcher is used to get token fees from GraphQL API and fallback to OnChainTokenFeeFetcher if GraphQL API fails

@@ -14,7 +14,7 @@ import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { Deferrable } from '@ethersproject/properties'
 import Logger from 'bunyan'
 import { UniJsonRpcProviderConfig } from './config'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '../util/testNets'
 
 export class UniJsonRpcProvider extends StaticJsonRpcProvider {
   readonly chainId: ChainId

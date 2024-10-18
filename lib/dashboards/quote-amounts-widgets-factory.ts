@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { PAIRS_TO_TRACK } from '../handlers/quote/util/pairs-to-track'
 import { Widget } from './core/model/widget'
 import { WidgetsFactory } from './core/widgets-factory'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '../util/testNets'
 
 export class QuoteAmountsWidgetsFactory implements WidgetsFactory {
   region: string

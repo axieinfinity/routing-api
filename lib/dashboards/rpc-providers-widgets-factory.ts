@@ -3,7 +3,7 @@ import { Widget } from './core/model/widget'
 import _ from 'lodash'
 import { ProviderName } from '../handlers/evm/provider/ProviderName'
 import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
-import { ChainId } from '../../bin/app'
+import { ChainId } from '../util/testNets'
 
 const ID_TO_PROVIDER = (id: ChainId): string => {
   switch (id) {

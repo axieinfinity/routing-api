@@ -5,7 +5,7 @@ import { computePortionAmount, parseDeadline, parseSlippageTolerance, populateFe
 import { PermitSingle } from '@uniswap/permit2-sdk'
 import { utils } from 'ethers'
 import { SwapOptionsUniversalRouter, SwapType, SwapOptionsSwapRouter02, SwapOptions } from '@axieinfinity/smart-order-router'
-import { ChainId } from '../../../bin/app'
+import { ChainId } from '../../util/testNets'
 
 export type SwapOptionsUniversalRouterInput = {
   chainId: ChainId

@@ -2,7 +2,7 @@ import { IV3SubgraphProvider, log, V3SubgraphPool, V3SubgraphProvider } from '@a
 import { S3 } from 'aws-sdk'
 import _ from 'lodash'
 import NodeCache from 'node-cache'
-import { ChainId } from '../../../bin/app'
+import { ChainId } from '../../util/testNets'
 
 const POOL_CACHE = new NodeCache({ stdTTL: 240, useClones: false })
 const POOL_CACHE_KEY = (chainId: ChainId) => `pools${chainId}`

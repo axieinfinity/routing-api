@@ -1,7 +1,6 @@
 import Joi from '@hapi/joi'
 import PROD_CONFIG from '../config/rpcProviderProdConfig.json'
-import { ChainId } from '../../bin/app'
-
+import { ChainId } from '../util/testNets'
 export interface ChainConfig {
   chainId: number
   useMultiProviderProb: number

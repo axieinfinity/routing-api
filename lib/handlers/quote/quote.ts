@@ -35,7 +35,7 @@ import { SwapOptionsFactory } from './SwapOptionsFactory'
 import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
 import semver from 'semver'
 import { Pair } from '@uniswap/v2-sdk'
-import { ChainId } from '../../../bin/app'
+import { ChainId } from '../../util/testNets'
 
 export class QuoteHandler extends APIGLambdaHandler<
   ContainerInjected,

@@ -60,7 +60,7 @@ import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
 import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
-import { ChainId, SUPPORTED_CHAINS } from '../../bin/app'
+import { ChainId, SUPPORTED_CHAINS } from '../util/testNets'
 
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 

@@ -4,7 +4,7 @@ import { FeeAmount, Pool } from '@uniswap/v3-sdk'
 import { IDynamoCache } from '../cache-dynamo'
 import { DynamoCachingV3Pool } from './cache-dynamo-pool'
 import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
-import { ChainId } from '../../../../../bin/app'
+import { ChainId } from '../../../../util/testNets'
 
 export class DynamoDBCachingV3PoolProvider implements IV3PoolProvider {
   private readonly dynamoCache: IDynamoCache<string, number, Pool>

@@ -1,4 +1,4 @@
-import { ChainId } from "../../bin/app"
+import { ChainId } from "../util/testNets"
 
 export function chainIdToNetworkName(networkId: ChainId): string {
   switch (networkId) {

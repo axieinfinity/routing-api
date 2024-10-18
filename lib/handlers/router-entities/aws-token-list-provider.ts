@@ -8,7 +8,7 @@ import {
 import { TokenList } from '@uniswap/token-lists'
 import S3 from 'aws-sdk/clients/s3'
 import NodeCache from 'node-cache'
-import { ChainId } from '../../../bin/app'
+import { ChainId } from '../../util/testNets'
 
 const TOKEN_LIST_CACHE = new NodeCache({ stdTTL: 600, useClones: false })
 

@@ -16,7 +16,7 @@ import { PairTradeTypeChainId } from './model/pair-trade-type-chain-id'
 import { CachedRoutesMarshaller } from '../../marshalling/cached-routes-marshaller'
 import { MixedRoute, V2Route, V3Route } from '@axieinfinity/smart-order-router'
 import { PromiseResult } from 'aws-sdk/lib/request'
-import { ChainId } from '../../../../bin/app'
+import { ChainId } from '../../../util/testNets'
 
 interface ConstructorParams {
   /**

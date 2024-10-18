@@ -4,7 +4,7 @@ import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../../util/onChainQuoteProviderConfigs'
 import { IOnChainQuoteProvider, V3Route, V2Route, OnChainQuotes, metric, MetricLoggerUnit, MixedRoute, log } from '@axieinfinity/smart-order-router'
 import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
-import { ChainId } from '../../../../../bin/app'
+import { ChainId } from '../../../../util/testNets'
 export type TrafficSwitchOnChainQuoteProviderProps = {
   currentQuoteProvider: IOnChainQuoteProvider
   targetQuoteProvider: IOnChainQuoteProvider
