@@ -74,23 +74,24 @@
     "@smithy/types" "^3.1.0"
     tslib "^2.6.2"
 
-"@axieinfinity/sdk-core@0.0.14":
-  version "0.0.14"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/sdk-core/0.0.14/8d6aa4ec62e1c332268cd2326077b12deed2b50b#8d6aa4ec62e1c332268cd2326077b12deed2b50b"
-  integrity sha512-RSA4xVxM8gXqfUSyz30u4FCKyvn8/jX2bi4Qg66jfkb42qRMpSdmSd576r9JdnSVpqpPLYxvIhj856+b6chKIQ==
+"@axieinfinity/sdk-core@0.0.16":
+  version "0.0.16"
+  resolved "https://npm.pkg.github.com/download/@axieinfinity/sdk-core/0.0.16/0677dd1b2d187acfe32b8192ca16d0640c71c787#0677dd1b2d187acfe32b8192ca16d0640c71c787"
+  integrity sha512-MRFHjTtDEBVw/IgAq4X45bkxHdlEsH32XK/SivaFnZda1Ugp7IRc53kcPJxPN4xy6U3NxBkCZUhiRDzRWnFP1g==
   dependencies:
     "@ethersproject/address" "5.0.2"
+    "@ethersproject/bignumber" "5.7.0"
     "@ethersproject/solidity" "5.0.9"
     "@uniswap/sdk-core" "5.3.0"
     "@uniswap/v3-sdk" "3.13.0"
     tiny-invariant "1.1.0"
 
-"@axieinfinity/smart-order-router@0.0.25":
-  version "0.0.25"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.25/29edc3d2fadeaad597fc99140b2ea41820fac79a#29edc3d2fadeaad597fc99140b2ea41820fac79a"
-  integrity sha512-RlnljZkbPzQ5UtBslQnyJhG9iF/e3+8HHi7F1hamfckBX870pL7PK4nM+ruW4TgLf9ZpC665oyNNFC0U1TDA6Q==
+"@axieinfinity/smart-order-router@0.0.27":
+  version "0.0.27"
+  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.27/f0e4db37cdfe52dccfff8f6b3183f63c38d22aa4#f0e4db37cdfe52dccfff8f6b3183f63c38d22aa4"
+  integrity sha512-Iw5FRVHnehk4+XbivLCaXRAO4E3ZjMGJOsDyaoOlTwbXkvX3ABQ4gSV7H75YVwY+f6FMxRDLQvs51MyZJVX15g==
   dependencies:
-    "@axieinfinity/sdk-core" "0.0.14"
+    "@axieinfinity/sdk-core" "0.0.16"
     "@eth-optimism/sdk" "^3.2.2"
     "@types/brotli" "^1.3.4"
     "@uniswap/default-token-list" "^11.13.0"
