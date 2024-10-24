@@ -1,6 +1,7 @@
-import { Pair } from '@uniswap/v2-sdk'
+import { CustomPair } from '@axieinfinity/sdk-core'
 import { CurrencyAmountMarshaller, MarshalledCurrencyAmount } from './currency-amount-marshaller'
 import { Protocol } from '@uniswap/router-sdk'
+import { Pair } from '@uniswap/v2-sdk'
 
 export interface MarshalledPair {
   protocol: Protocol
@@ -18,7 +19,7 @@ export class PairMarshaller {
   }
 
   public static unmarshal(marshalledPair: MarshalledPair): Pair {
-    return new Pair(
+    return new CustomPair(
       CurrencyAmountMarshaller.unmarshal(marshalledPair.currencyAmountA),
       CurrencyAmountMarshaller.unmarshal(marshalledPair.tokenAmountB)
     )
