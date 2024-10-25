@@ -74,23 +74,25 @@
     "@smithy/types" "^3.1.0"
     tslib "^2.6.2"
 
-"@axieinfinity/sdk-core@0.0.14":
-  version "0.0.14"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/sdk-core/0.0.14/8d6aa4ec62e1c332268cd2326077b12deed2b50b#8d6aa4ec62e1c332268cd2326077b12deed2b50b"
-  integrity sha512-RSA4xVxM8gXqfUSyz30u4FCKyvn8/jX2bi4Qg66jfkb42qRMpSdmSd576r9JdnSVpqpPLYxvIhj856+b6chKIQ==
+"@axieinfinity/sdk-core@0.0.17":
+  version "0.0.17"
+  resolved "https://npm.pkg.github.com/download/@axieinfinity/sdk-core/0.0.17/fe3dcc50b267610dfa1eb56cd3976db8658f8008#fe3dcc50b267610dfa1eb56cd3976db8658f8008"
+  integrity sha512-e7lNJrlXWwtePVHOKHDQkqltnsxdktpMWD0WJDAFPEmsSNpenNz8gzxiU4t0gABuBpL8EgtylTpvhj8dLE8Bog==
   dependencies:
     "@ethersproject/address" "5.0.2"
     "@ethersproject/solidity" "5.0.9"
     "@uniswap/sdk-core" "5.3.0"
+    "@uniswap/v2-sdk" "4.3.2"
     "@uniswap/v3-sdk" "3.13.0"
+    jsbi "3.2.5"
     tiny-invariant "1.1.0"
 
-"@axieinfinity/smart-order-router@0.0.30":
-  version "0.0.30"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.30/f4ccefb09c254fa625380a672a30b7109532099a#f4ccefb09c254fa625380a672a30b7109532099a"
-  integrity sha512-nHE1PQbQOLaBdUYdP1BGk3W1BX7R9+6rmU3Js/Mxdcbe+Vp8GpDcKWUmCjHRfYp6iEN4gBdiGBUVl/tZ03iVTA==
+"@axieinfinity/smart-order-router@0.0.28":
+  version "0.0.28"
+  resolved "https://npm.pkg.github.com/download/@axieinfinity/smart-order-router/0.0.28/0c07a078c839859b9061e154ab5907069394ea39#0c07a078c839859b9061e154ab5907069394ea39"
+  integrity sha512-INo30BU+BQhNSP5ciHf506B6bMjC1VBW9DS8dAqdqtXalQrS+unEEkFKIWLewEn1Eg795y7BoW4gwuK7IecQNw==
   dependencies:
-    "@axieinfinity/sdk-core" "0.0.14"
+    "@axieinfinity/sdk-core" "0.0.17"
     "@eth-optimism/sdk" "^3.2.2"
     "@types/brotli" "^1.3.4"
     "@uniswap/default-token-list" "^11.13.0"
@@ -8535,7 +8537,7 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-jsbi@^3.1.4:
+jsbi@3.2.5, jsbi@^3.1.4:
   version "3.2.5"
   resolved "https://registry.npmjs.org/jsbi/-/jsbi-3.2.5.tgz"
   integrity sha512-aBE4n43IPvjaddScbvWRA2YlTzKEynHzu7MqOyTipdHucf/VxS63ViCjxYRg86M8Rxwbt/GfzHl1kKERkt45fQ==
