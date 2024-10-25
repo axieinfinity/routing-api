@@ -1,4 +1,4 @@
-import { SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
+import { SUPPORTED_CHAINS } from '@sky-mavis/katana-core'
 import BaseJoi from '@hapi/joi'
 const Joi = BaseJoi.extend((joi) => ({
   base: joi.array(),

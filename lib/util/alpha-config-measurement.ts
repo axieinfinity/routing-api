@@ -1,8 +1,8 @@
 import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import { Protocol } from '@uniswap/router-sdk'
 
-import { log, metric, MetricLoggerUnit, SwapRoute } from '@axieinfinity/smart-order-router'
+import { log, metric, MetricLoggerUnit, SwapRoute } from '@sky-mavis/smart-order-router'
 
 export const getDistribution = (distributionPercent: number) => {
   const percents: Array<number> = new Array<number>()

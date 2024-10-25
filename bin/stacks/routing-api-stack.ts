@@ -18,7 +18,7 @@ import { RpcGatewayDashboardStack } from './rpc-gateway-dashboard'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
 import { RpcGatewayFallbackStack } from './rpc-gateway-fallback-stack'
-import { ChainId, SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
+import { ChainId, SUPPORTED_CHAINS } from '@sky-mavis/katana-core'
 
 export const CHAINS_NOT_MONITORED: ChainId[] = TESTNETS
 export const REQUEST_SOURCES_NOT_MONITORED = ['unknown']

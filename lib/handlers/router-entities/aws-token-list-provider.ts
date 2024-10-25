@@ -1,11 +1,11 @@
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import {
   CachingTokenListProvider,
   ITokenListProvider,
   ITokenProvider,
   log,
   NodeJSCache,
-} from '@axieinfinity/smart-order-router'
+} from '@sky-mavis/smart-order-router'
 import { TokenList } from '@uniswap/token-lists'
 import S3 from 'aws-sdk/clients/s3'
 import NodeCache from 'node-cache'

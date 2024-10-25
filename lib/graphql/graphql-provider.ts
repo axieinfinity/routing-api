@@ -1,4 +1,4 @@
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 
 import { GraphQLClient, IGraphQLClient } from './graphql-client'
 import {

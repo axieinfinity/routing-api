@@ -1,6 +1,6 @@
 import {  TradeType } from '@uniswap/sdk-core'
-import { CachedRoutes } from '@axieinfinity/smart-order-router'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { CachedRoutes } from '@sky-mavis/smart-order-router'
+import { ChainId } from '@sky-mavis/katana-core'
 
 interface PairTradeTypeChainIdArgs {
   tokenIn: string

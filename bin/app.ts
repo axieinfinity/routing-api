@@ -10,7 +10,7 @@ import dotenv from 'dotenv'
 import 'source-map-support/register'
 import { STAGE } from '../lib/util/stage'
 import { RoutingAPIStack } from './stacks/routing-api-stack'
-import { SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
+import { SUPPORTED_CHAINS } from '@sky-mavis/katana-core'
 
 dotenv.config()
 

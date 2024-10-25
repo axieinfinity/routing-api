@@ -1,4 +1,4 @@
-import { SimulationStatus } from '@axieinfinity/smart-order-router'
+import { SimulationStatus } from '@sky-mavis/smart-order-router'
 import Logger from 'bunyan'
 
 export enum RoutingApiSimulationStatus {

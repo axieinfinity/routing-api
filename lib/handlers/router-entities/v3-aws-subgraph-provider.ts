@@ -1,6 +1,6 @@
-import { IV3SubgraphProvider, log, V3SubgraphPool, V3SubgraphProvider } from '@axieinfinity/smart-order-router'
+import { IV3SubgraphProvider, log, V3SubgraphPool, V3SubgraphProvider } from '@sky-mavis/smart-order-router'
 import { S3 } from 'aws-sdk'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import _ from 'lodash'
 import NodeCache from 'node-cache'
 

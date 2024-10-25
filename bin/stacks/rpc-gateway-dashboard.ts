@@ -6,8 +6,8 @@ import { CallType, MAJOR_METHOD_NAMES } from '../../lib/rpc/SingleJsonRpcProvide
 import { TESTNETS } from '../../lib/util/testNets'
 import { getRpcGatewayEnabledChains } from '../../lib/rpc/ProdConfig'
 import { getProviderId } from '../../lib/rpc/utils'
-import { ChainId, SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
-import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
+import { ChainId, SUPPORTED_CHAINS } from '@sky-mavis/katana-core'
+import { ID_TO_NETWORK_NAME } from '@sky-mavis/smart-order-router'
 
 const providerNameForChain: Map<ChainId, string[]> = getRpcGatewayEnabledChains()
 

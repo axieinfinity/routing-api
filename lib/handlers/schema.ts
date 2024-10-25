@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi'
-import { MethodParameters } from '@axieinfinity/smart-order-router'
+import { MethodParameters } from '@sky-mavis/smart-order-router'
 import { RoutingApiSimulationStatus } from './quote/util/simulation'
 
 export type TokenInRoute = {

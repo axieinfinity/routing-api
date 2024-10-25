@@ -1,4 +1,4 @@
-import { CacheMode } from '@axieinfinity/smart-order-router'
+import { CacheMode } from '@sky-mavis/smart-order-router'
 
 interface CachedRoutesBucketsArgs {
   /**

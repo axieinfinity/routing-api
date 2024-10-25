@@ -11,7 +11,7 @@ import {
   SimulationStatus,
   SwapOptions,
   SwapRoute,
-} from '@axieinfinity/smart-order-router'
+} from '@sky-mavis/smart-order-router'
 import { Pool } from '@uniswap/v3-sdk'
 import JSBI from 'jsbi'
 import _ from 'lodash'
@@ -34,7 +34,7 @@ import { CurrencyLookup } from '../CurrencyLookup'
 import { SwapOptionsFactory } from './SwapOptionsFactory'
 import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
 import semver from 'semver'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import { Pair } from '@uniswap/v2-sdk'
 
 export class QuoteHandler extends APIGLambdaHandler<

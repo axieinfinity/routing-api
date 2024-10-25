@@ -1,6 +1,6 @@
 import { Pair } from '@uniswap/v2-sdk'
 import { BatchGetItemInput, DocumentClient } from 'aws-sdk/clients/dynamodb'
-import { ICache, log, metric, MetricLoggerUnit } from '@axieinfinity/smart-order-router'
+import { ICache, log, metric, MetricLoggerUnit } from '@sky-mavis/smart-order-router'
 import { MarshalledPair, PairMarshaller } from '../../../marshalling'
 
 export class V2DynamoCache implements ICache<{ pair: Pair; block?: number }> {

@@ -3,10 +3,10 @@ import {
   AlphaRouterConfig,
   CacheMode,
   ProtocolPoolSelection,
-} from '@axieinfinity/smart-order-router'
+} from '@sky-mavis/smart-order-router'
 import { FeeOptions } from '@uniswap/v3-sdk'
 import { FlatFeeOptions } from '@uniswap/universal-router-sdk'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 
 export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterConfig => {
   switch (chainId) {

@@ -4,8 +4,8 @@ import { TradeTypeParam } from './schema/quote-schema'
 import { computePortionAmount, parseDeadline, parseSlippageTolerance, populateFeeOptions } from '../shared'
 import { PermitSingle } from '@uniswap/permit2-sdk'
 import { utils } from 'ethers'
-import { ChainId, UNIVERSAL_ROUTER_ADDRESS } from '@axieinfinity/sdk-core'
-import { SwapOptionsUniversalRouter, SwapType, SwapOptionsSwapRouter02, SwapOptions } from '@axieinfinity/smart-order-router'
+import { ChainId, UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core'
+import { SwapOptionsUniversalRouter, SwapType, SwapOptionsSwapRouter02, SwapOptions } from '@sky-mavis/smart-order-router'
 
 export type SwapOptionsUniversalRouterInput = {
   chainId: ChainId

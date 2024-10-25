@@ -1,4 +1,4 @@
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import {  TradeType } from '@uniswap/sdk-core'
 
 export const PAIRS_TO_TRACK: Map<ChainId, Map<TradeType, string[]>> = new Map([

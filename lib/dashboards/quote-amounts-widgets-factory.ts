@@ -1,6 +1,6 @@
 import { TradeType } from '@uniswap/sdk-core'
-import { ID_TO_NETWORK_NAME } from '@axieinfinity/smart-order-router'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ID_TO_NETWORK_NAME } from '@sky-mavis/smart-order-router'
+import { ChainId } from '@sky-mavis/katana-core'
 import _ from 'lodash'
 import { PAIRS_TO_TRACK } from '../handlers/quote/util/pairs-to-track'
 import { Widget } from './core/model/widget'

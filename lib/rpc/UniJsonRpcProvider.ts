@@ -1,7 +1,7 @@
 import { CallType, MAJOR_METHOD_NAMES, SingleJsonRpcProvider } from './SingleJsonRpcProvider'
 import { StaticJsonRpcProvider, TransactionRequest } from '@ethersproject/providers'
 import { isEmpty } from 'lodash'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import {
   BlockTag,
   BlockWithTransactions,

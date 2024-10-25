@@ -8,15 +8,15 @@ import {
   metric,
   MetricLoggerUnit,
   routeToString,
-} from '@axieinfinity/smart-order-router'
+} from '@sky-mavis/smart-order-router'
 import { AWSError, DynamoDB, Lambda } from 'aws-sdk'
 import {  Currency, CurrencyAmount, Fraction, Token, TradeType } from '@uniswap/sdk-core'
 import { Protocol } from '@uniswap/router-sdk'
 import { PairTradeTypeChainId } from './model/pair-trade-type-chain-id'
 import { CachedRoutesMarshaller } from '../../marshalling/cached-routes-marshaller'
-import { MixedRoute, V2Route, V3Route } from '@axieinfinity/smart-order-router'
+import { MixedRoute, V2Route, V3Route } from '@sky-mavis/smart-order-router'
 import { PromiseResult } from 'aws-sdk/lib/request'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 
 interface ConstructorParams {
   /**

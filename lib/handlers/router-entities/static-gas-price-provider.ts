@@ -1,4 +1,4 @@
-import { GasPrice, IGasPriceProvider } from '@axieinfinity/smart-order-router'
+import { GasPrice, IGasPriceProvider } from '@sky-mavis/smart-order-router'
 import { BigNumber } from 'ethers'
 
 export class StaticGasPriceProvider implements IGasPriceProvider {

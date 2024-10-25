@@ -1,4 +1,4 @@
-import { CustomPair } from '@axieinfinity/sdk-core'
+import { CustomPair } from '@sky-mavis/katana-core'
 import { CurrencyAmountMarshaller, MarshalledCurrencyAmount } from './currency-amount-marshaller'
 import { Protocol } from '@uniswap/router-sdk'
 import { Pair } from '@uniswap/v2-sdk'

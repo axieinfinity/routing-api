@@ -2,10 +2,10 @@ import { Protocol } from '@uniswap/router-sdk'
 import {
   setGlobalLogger,
   setGlobalMetric,
-} from '@axieinfinity/smart-order-router'
+} from '@sky-mavis/smart-order-router'
 import { EventBridgeEvent, ScheduledHandler } from 'aws-lambda'
 import { S3 } from 'aws-sdk'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import { default as bunyan, default as Logger } from 'bunyan'
 import { S3_POOL_CACHE_KEY } from '../util/pool-cache-key'
 import {

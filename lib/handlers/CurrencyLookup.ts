@@ -1,8 +1,8 @@
 import { Currency, Token } from '@uniswap/sdk-core'
-import { ITokenListProvider, ITokenProvider, NATIVE_NAMES_BY_ID } from '@axieinfinity/smart-order-router'
+import { ITokenListProvider, ITokenProvider, NATIVE_NAMES_BY_ID } from '@sky-mavis/smart-order-router'
 import Logger from 'bunyan'
 import { isAddress } from '../util/isAddress'
-import { RON } from '@axieinfinity/sdk-core'
+import { RON } from '@sky-mavis/katana-core'
 
 /**
  * CurrencyLookup searches native tokens, token lists, and on chain to determine

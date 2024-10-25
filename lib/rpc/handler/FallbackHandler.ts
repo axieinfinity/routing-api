@@ -1,5 +1,5 @@
 import Logger from 'bunyan'
-import { ChainId } from '@axieinfinity/sdk-core'
+import { ChainId } from '@sky-mavis/katana-core'
 import { getProviderId } from '../utils'
 import { ProviderHealthStateRepository } from '../ProviderHealthStateRepository'
 import { ProviderHealthStateDynamoDbRepository } from '../ProviderHealthStateDynamoDbRepository'
@@ -7,7 +7,7 @@ import { ProviderHealthiness, ProviderHealthState } from '../ProviderHealthState
 import { metricScope, MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyResult } from 'aws-lambda'
 import { AWSMetricsLogger } from '../../handlers/router-entities/aws-metrics-logger'
-import { metric, MetricLoggerUnit, setGlobalMetric } from '@axieinfinity/smart-order-router'
+import { metric, MetricLoggerUnit, setGlobalMetric } from '@sky-mavis/smart-order-router'
 
 export interface AlarmEvent {
   alarmName: string

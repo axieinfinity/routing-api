@@ -6,7 +6,7 @@ import {
   setGlobalLogger,
   setGlobalMetric,
   V3HeuristicGasModelFactory,
-} from '@axieinfinity/smart-order-router'
+} from '@sky-mavis/smart-order-router'
 import { MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import { default as bunyan, default as Logger } from 'bunyan'

@@ -1,5 +1,5 @@
 import { Token } from '@uniswap/sdk-core'
-import { ChainId, MIXED_ROUTE_QUOTER_V1_ADDRESSES, QUOTER_ADDRESSES, SUPPORTED_CHAINS } from '@axieinfinity/sdk-core'
+import { ChainId, MIXED_ROUTE_QUOTER_V1_ADDRESSES, QUOTER_ADDRESSES, SUPPORTED_CHAINS } from '@sky-mavis/katana-core'
 import {
   CachingGasStationProvider,
   CachingTokenListProvider,
@@ -32,7 +32,7 @@ import {
   V2PoolProvider,
   V2QuoteProvider,
   V3PoolProvider,
-} from '@axieinfinity/smart-order-router'
+} from '@sky-mavis/smart-order-router'
 
 import { TokenList } from '@uniswap/token-lists'
 import { default as bunyan, default as Logger } from 'bunyan'
@@ -60,7 +60,7 @@ import { UniJsonRpcProvider } from '../rpc/UniJsonRpcProvider'
 import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
-import { OnChainTokenFeeFetcher } from '@axieinfinity/smart-order-router/dist/main/providers/token-fee-fetcher'
+import { OnChainTokenFeeFetcher } from '@sky-mavis/smart-order-router/dist/main/providers/token-fee-fetcher'
 
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 

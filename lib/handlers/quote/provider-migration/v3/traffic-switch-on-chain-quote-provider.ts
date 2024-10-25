@@ -2,9 +2,9 @@ import {  Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../../util/quote-provider-traffic-switch-configuration'
 import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../../util/onChainQuoteProviderConfigs'
-import { ChainId } from '@axieinfinity/sdk-core'
-import { IOnChainQuoteProvider, V3Route, V2Route, OnChainQuotes, metric, MetricLoggerUnit, MixedRoute, log } from '@axieinfinity/smart-order-router'
-import { ProviderConfig } from '@axieinfinity/smart-order-router/dist/main/providers/provider'
+import { ChainId } from '@sky-mavis/katana-core'
+import { IOnChainQuoteProvider, V3Route, V2Route, OnChainQuotes, metric, MetricLoggerUnit, MixedRoute, log } from '@sky-mavis/smart-order-router'
+import { ProviderConfig } from '@sky-mavis/smart-order-router/dist/main/providers/provider'
 export type TrafficSwitchOnChainQuoteProviderProps = {
   currentQuoteProvider: IOnChainQuoteProvider
   targetQuoteProvider: IOnChainQuoteProvider
