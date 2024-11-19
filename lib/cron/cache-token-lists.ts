@@ -3,6 +3,7 @@ import { S3 } from 'aws-sdk'
 import axios from 'axios'
 import { default as bunyan, default as Logger } from 'bunyan'
 
+// TEMP no need default token list
 const TOKEN_LISTS: any = []
 
 const handler: ScheduledHandler = async (event: EventBridgeEvent<string, void>) => {

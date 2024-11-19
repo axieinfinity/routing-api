@@ -61,9 +61,6 @@ import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
 import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
 import { OnChainTokenFeeFetcher } from '@sky-mavis/smart-order-router/dist/main/providers/token-fee-fetcher'
-
-const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
-
 export interface RequestInjected<Router> extends BaseRInj {
   chainId: ChainId
   metric: IMetric
@@ -123,7 +120,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
       const {
         POOL_CACHE_BUCKET_3,
         POOL_CACHE_GZIP_KEY,
-        TOKEN_LIST_CACHE_BUCKET,
+        // TOKEN_LIST_CACHE_BUCKET,
         ROUTES_TABLE_NAME,
         ROUTES_CACHING_REQUEST_FLAG_TABLE_NAME,
         CACHED_ROUTES_TABLE_NAME,
@@ -233,7 +230,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
 
           const [tokenListProvider, blockedTokenListProvider, v3SubgraphProvider, v2SubgraphProvider] =
             await Promise.all([
-              AWSTokenListProvider.fromTokenListS3Bucket(chainId, TOKEN_LIST_CACHE_BUCKET!, DEFAULT_TOKEN_LIST),
+              // AWSTokenListProvider.fromTokenListS3Bucket(chainId, TOKEN_LIST_CACHE_BUCKET!, DEFAULT_TOKEN_LIST),
+              AWSTokenListProvider.fromTokenListS3Bucket(chainId),
               CachingTokenListProvider.fromTokenList(chainId, UNSUPPORTED_TOKEN_LIST as TokenList, blockedTokenCache),
               (async () => {
                 try {
