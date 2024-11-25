@@ -11,12 +11,12 @@ const v2UntrackedUsdThreshold = Number.MAX_VALUE // Pairs need at least 1K USD (
 export const chainProtocols = [
   // V3.
   // TODO: Uncomment when mainnet subgraph is ready.
-  // {
-  //   protocol: Protocol.V3,
-  //   chainId: ChainId.mainnet,
-  //   timeout: 90000,
-  //   provider: new V3SubgraphProvider(ChainId.mainnet, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
-  // },
+  {
+    protocol: Protocol.V3,
+    chainId: ChainId.mainnet,
+    timeout: 90000,
+    provider: new V3SubgraphProvider(ChainId.mainnet, 3, 90000, true, v3TrackedEthThreshold, v3UntrackedUsdThreshold),
+  },
 
   {
     protocol: Protocol.V3,
@@ -26,20 +26,20 @@ export const chainProtocols = [
   },
 
   // V2.
-  // {
-  //   protocol: Protocol.V2,
-  //   chainId: ChainId.mainnet,
-  //   timeout: 840000,
-  //   provider: new V2SubgraphProvider(
-  //     ChainId.mainnet,
-  //     5,
-  //     900000,
-  //     true,
-  //     1000,
-  //     v2TrackedEthThreshold,
-  //     v2UntrackedUsdThreshold
-  //   ), // 1000 is the largest page size supported by thegraph
-  // },
+  {
+    protocol: Protocol.V2,
+    chainId: ChainId.mainnet,
+    timeout: 840000,
+    provider: new V2SubgraphProvider(
+      ChainId.mainnet,
+      5,
+      900000,
+      true,
+      1000,
+      v2TrackedEthThreshold,
+      v2UntrackedUsdThreshold
+    ), // 1000 is the largest page size supported by thegraph
+  },
 
   {
     protocol: Protocol.V2,
