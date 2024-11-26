@@ -295,6 +295,7 @@ const app = new cdk.App()
 
 const jsonRpcProviders = {
   WEB3_RPC_2021: process.env.WEB3_RPC_2021!,
+  WEB3_RPC_2020: process.env.WEB3_RPC_2020!,
 }
 
 // Local dev stack
