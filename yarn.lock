@@ -1785,10 +1785,10 @@
   resolved "https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-0.7.2.tgz"
   integrity sha512-sXXKG+uL9IrKqViTtao2Ws6dy0znu9sOaP1di/jKGW1M6VssO8vlpXCQcpZ+jisQ1tTFAC5Jo/EOzFbggBagFQ==
 
-"@sky-mavis/katana-core@0.0.1-alpha-2":
-  version "0.0.1-alpha-2"
-  resolved "https://registry.yarnpkg.com/@sky-mavis/katana-core/-/katana-core-0.0.1-alpha-2.tgz#cf2007f3c841e687c12c1f3677db0d07036cbea7"
-  integrity sha512-BxdYlYHGHSyqJFOXmcTu6q3C52Ix+jU524+3PoIXmIEw19bT9BmVl5ZJXhnNpzkcKOB1Sw4HUbWLBsc8fpHQAg==
+"@sky-mavis/katana-core@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@sky-mavis/katana-core/-/katana-core-0.0.1.tgz#c6dcb8d212c37dedca60a829bcd650723d824a41"
+  integrity sha512-HbNH7gSi7tJY1OkX8hVXfK5vQqHM1AfbeNDQfZNi5HtjpKekiiPZS9XDNotRdAs0CUhMhsFzEwkx0c7pl4CvmQ==
   dependencies:
     "@ethersproject/address" "5.0.2"
     "@ethersproject/solidity" "5.0.9"
@@ -1798,13 +1798,13 @@
     jsbi "3.2.5"
     tiny-invariant "1.1.0"
 
-"@sky-mavis/smart-order-router@0.0.1-alpha-2":
-  version "0.0.1-alpha-2"
-  resolved "https://registry.yarnpkg.com/@sky-mavis/smart-order-router/-/smart-order-router-0.0.1-alpha-2.tgz#150c240e0fb1d8b6c653b00726300bff15bb8d3f"
-  integrity sha512-n7tnjn/AWNeprZh3q2KaZ+uyCa1kZ7zx2UoQWpcKpPbyG/3mMS4EKvIMTdNDY+5dLv72URX1QoIDU4/lnKKUHg==
+"@sky-mavis/smart-order-router@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@sky-mavis/smart-order-router/-/smart-order-router-0.0.1.tgz#0fcf039914f98a603442879e05ea56e158be6529"
+  integrity sha512-KDD4a13GtgqrpV5L+Hor0JTY70oNwrGs3fqbNKsr3ZX3m2Vy+TPS5FL2CdGFdNZvseU3Y1xRRwhoRUUXNlL83A==
   dependencies:
     "@eth-optimism/sdk" "^3.2.2"
-    "@sky-mavis/katana-core" "0.0.1-alpha-2"
+    "@sky-mavis/katana-core" "0.0.1"
     "@uniswap/permit2-sdk" "1.3.0"
     "@uniswap/router-sdk" "1.9.2"
     "@uniswap/sdk-core" "5.3.0"
@@ -3880,9 +3880,9 @@ base-path-converter@^1.0.2:
   integrity sha512-51R8JiuXadknn6ouVUteOhDpmI3G5u5GqjruL7bPJpfxUHVgosaO5uPAvRP4FeR4VyyH4sSvsN78Ci6ouoRYqQ==
 
 base-x@^3.0.2, base-x@^3.0.8:
-  version "3.0.9"
-  resolved "https://registry.npmjs.org/base-x/-/base-x-3.0.9.tgz"
-  integrity sha512-H7JU6iBHTal1gp56aKoaa//YUxEaAOUiydvrV/pILqIHXTtqxSkATOnDA2u+jZ/61sD+L/412+7kzXRtWukhpQ==
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/base-x/-/base-x-3.0.11.tgz#40d80e2a1aeacba29792ccc6c5354806421287ff"
+  integrity sha512-xz7wQ8xDhdyP7tQxwdteLYeFfS68tSMNCZ/Y37WJ4bhGfKPpqEIlmIyueQHqOyoPhE6xNUqjzRr8ra0eF9VRvA==
   dependencies:
     safe-buffer "^5.0.1"
 
