@@ -1785,10 +1785,10 @@
   resolved "https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-0.7.2.tgz"
   integrity sha512-sXXKG+uL9IrKqViTtao2Ws6dy0znu9sOaP1di/jKGW1M6VssO8vlpXCQcpZ+jisQ1tTFAC5Jo/EOzFbggBagFQ==
 
-"@sky-mavis/katana-core@0.0.1-alpha-2":
-  version "0.0.1-alpha-2"
-  resolved "https://registry.yarnpkg.com/@sky-mavis/katana-core/-/katana-core-0.0.1-alpha-2.tgz#cf2007f3c841e687c12c1f3677db0d07036cbea7"
-  integrity sha512-BxdYlYHGHSyqJFOXmcTu6q3C52Ix+jU524+3PoIXmIEw19bT9BmVl5ZJXhnNpzkcKOB1Sw4HUbWLBsc8fpHQAg==
+"@sky-mavis/katana-core@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@sky-mavis/katana-core/-/katana-core-0.0.1.tgz#c6dcb8d212c37dedca60a829bcd650723d824a41"
+  integrity sha512-HbNH7gSi7tJY1OkX8hVXfK5vQqHM1AfbeNDQfZNi5HtjpKekiiPZS9XDNotRdAs0CUhMhsFzEwkx0c7pl4CvmQ==
   dependencies:
     "@ethersproject/address" "5.0.2"
     "@ethersproject/solidity" "5.0.9"
@@ -1798,13 +1798,13 @@
     jsbi "3.2.5"
     tiny-invariant "1.1.0"
 
-"@sky-mavis/smart-order-router@0.0.1-alpha-2":
-  version "0.0.1-alpha-2"
-  resolved "https://registry.yarnpkg.com/@sky-mavis/smart-order-router/-/smart-order-router-0.0.1-alpha-2.tgz#150c240e0fb1d8b6c653b00726300bff15bb8d3f"
-  integrity sha512-n7tnjn/AWNeprZh3q2KaZ+uyCa1kZ7zx2UoQWpcKpPbyG/3mMS4EKvIMTdNDY+5dLv72URX1QoIDU4/lnKKUHg==
+"@sky-mavis/smart-order-router@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@sky-mavis/smart-order-router/-/smart-order-router-0.0.1.tgz#0fcf039914f98a603442879e05ea56e158be6529"
+  integrity sha512-KDD4a13GtgqrpV5L+Hor0JTY70oNwrGs3fqbNKsr3ZX3m2Vy+TPS5FL2CdGFdNZvseU3Y1xRRwhoRUUXNlL83A==
   dependencies:
     "@eth-optimism/sdk" "^3.2.2"
-    "@sky-mavis/katana-core" "0.0.1-alpha-2"
+    "@sky-mavis/katana-core" "0.0.1"
     "@uniswap/permit2-sdk" "1.3.0"
     "@uniswap/router-sdk" "1.9.2"
     "@uniswap/sdk-core" "5.3.0"
@@ -12583,9 +12583,9 @@ undici-types@~5.26.4:
   integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
 
 undici@^5.14.0:
-  version "5.28.4"
-  resolved "https://registry.npmjs.org/undici/-/undici-5.28.4.tgz"
-  integrity sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-5.29.0.tgz#419595449ae3f2cdcba3580a2e8903399bd1f5a3"
+  integrity sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==
   dependencies:
     "@fastify/busboy" "^2.0.0"
 
